@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">GetPerms Demo</string>
+    <string name="method1">Method 1: getPerms("ALL"); - all permissions for all packages</string>
+    <string name="method2">Method 2: getPerms("GRANTED"); - granted permissions for all packages</string>
+    <string name="method3">Method 3: getPerms("package_name", "ALL"); - all permissions for a specific package</string>
+    <string name="method4">Method 4: getPerms("package_name", "GRANTED"); - granted permissions for a specific package</string>
 </resources>
