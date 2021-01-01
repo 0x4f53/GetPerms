@@ -26,7 +26,7 @@ public class GetPerms {
         context = context_arg;
     }
 
-    public JSONObject getRequested(){
+    public JSONObject getRequested() {
         HashMap<String, String> perms = new HashMap<>();
         final PackageManager pm = context.getPackageManager();
         try {
@@ -41,7 +41,7 @@ public class GetPerms {
         return new JSONObject(perms);
     }
 
-    public JSONObject getRequested(String package_name){
+    public JSONObject getRequested(String package_name) {
         HashMap<String, String[]> requested_perms = new HashMap<>();
         try{
             PackageInfo packageInfo = context.getPackageManager().getPackageInfo(package_name, GET_PERMISSIONS);
@@ -62,12 +62,12 @@ public class GetPerms {
         return new JSONObject(requested_perms);
     }
 
-    public String getGranted(){
+    public String getGranted() {
 
         return "";
     }
 
-    public JSONObject getGranted(String package_name){
+    public JSONObject getGranted(String package_name) {
         HashMap<String, String[]> granted_perms = new HashMap<>();
         final PackageManager pm = context.getPackageManager();
         int perm_index = 0;
