@@ -15,8 +15,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         EditText editText = (EditText)findViewById(R.id.packagenameinput);
-        TextView requested_specific_output = (TextView)findViewById(R.id.method3output);
-        TextView granted_specific_output = (TextView)findViewById(R.id.method4output);
+        TextView requested_specific_output = (TextView)findViewById(R.id.method4output);
+        TextView granted_specific_output = (TextView)findViewById(R.id.method5output);
         editText.setOnKeyListener((View.OnKeyListener) (v, keyCode, event) -> {
             if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
                 String package_name = editText.getText().toString();
@@ -26,8 +26,12 @@ public class MainActivity extends AppCompatActivity {
             }
             return false;
         });
-        TextView requested_all_output = findViewById(R.id.method1output);
+        TextView list_all_output = findViewById(R.id.method1output);
+        TextView requested_all_output = findViewById(R.id.method2output);
+        TextView granted_all_output = findViewById(R.id.method3output);
         GetPerms gp = new GetPerms(getApplicationContext());
+        list_all_output.setText(gp.listPackages().toString());
         requested_all_output.setText(gp.getRequested().toString());
+        granted_all_output.setText(gp.getGranted().toString());
     }
 }

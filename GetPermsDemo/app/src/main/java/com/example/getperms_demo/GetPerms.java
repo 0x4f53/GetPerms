@@ -28,7 +28,23 @@ public class GetPerms {
         context = context_arg;
     }
 
-    public JSONObject getRequested(String package_name) {
+    public JSONObject listPackages() {  // method to list all packages
+        HashMap<String, String> perms = new HashMap<>();
+        final PackageManager pm = context.getPackageManager();
+        try {
+            List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
+            for (ApplicationInfo packageInfo : packages) {
+                perms.put((String) pm.getApplicationLabel(pm.getApplicationInfo(packageInfo.packageName, PackageManager.GET_META_DATA)),packageInfo.packageName);
+            }
+        } catch (Exception ex){
+            Log.e("GetPerms", "Could not find packages!");
+            Toast toast=Toast.makeText(context,"No packages found!",Toast.LENGTH_SHORT);
+            toast.show();
+        }
+        return new JSONObject(perms);
+    }
+
+    public JSONObject getRequested(String package_name) {  // method to get all requested permissions for a particular package
         HashMap<String, String[]> requested_perms = new HashMap<>();
         try{
             PackageInfo packageInfo = context.getPackageManager().getPackageInfo(package_name, GET_PERMISSIONS);
@@ -45,6 +61,8 @@ public class GetPerms {
             Log.e("GetPerms", "Package not found on system!");
             Toast toast=Toast.makeText(context,"Package not found!",Toast.LENGTH_SHORT);
             toast.show();
+        } catch (NullPointerException noPermissions){
+            Log.e("GetPerms", "Package requests no permissions!");
         }
         return new JSONObject(requested_perms);
     }
@@ -55,7 +73,7 @@ public class GetPerms {
         try {
             List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
             for (ApplicationInfo packageInfo : packages) {
-                perms.put(packageInfo.packageName, "");
+                perms.put(packageInfo.packageName, getRequested(packageInfo.packageName).toString());
             }
         } catch (Exception ex) {
             Log.e("GetPerms", "Package not found on system!");
@@ -95,21 +113,20 @@ public class GetPerms {
             Log.e("GetPerms", "Package not found on system!");
             Toast toast=Toast.makeText(context,"Package not found!",Toast.LENGTH_SHORT);
             toast.show();
+        } catch (NullPointerException noPermissions){
+            Log.e("GetPerms", "Package requests no permissions!");
         }
         return new JSONObject(granted_perms);
     }
 
-
-
-    public JSONObject getGranted() {  // method to get all granted permissions from all packages
+    public JSONObject getGranted() {  // method to get all granted permissions for a particular package
         HashMap<String, String> perms = new HashMap<>();
         final PackageManager pm = context.getPackageManager();
         try {
             List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
             for (ApplicationInfo packageInfo : packages) {
-                perms.put(packageInfo.packageName, "");
+                perms.put(packageInfo.packageName, getGranted(packageInfo.packageName).toString());
             }
-
         } catch (Exception ex) {
             Log.e("GetPerms", "Package not found on system!");
             Toast toast=Toast.makeText(context,"Package not found!",Toast.LENGTH_SHORT);
@@ -117,5 +134,4 @@ public class GetPerms {
         }
         return new JSONObject(perms);
     }
-
 }

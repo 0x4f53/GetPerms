@@ -19,11 +19,58 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <EditText
+                android:id="@+id/packagenameinput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Enter package name"
+                android:inputType="textPersonName"
+                android:maxLines="1" />
+
+            <TextView
+                android:id="@+id/method4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="4: getRequested(package_name) - requested permissions for a specific package"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/method4output"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="-" />
+
+            <View
+                android:id="@+id/divider4"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider" />
+
+            <TextView
+                android:id="@+id/method5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="5: getGranted(package_name) - granted permissions for a specific package"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/method5output"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="-" />
+
+            <View
+                android:id="@+id/divider5"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider" />
+
             <TextView
                 android:id="@+id/method1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="1: getRequested() - requested permissions for all packages"
+                android:text="1: listPackages() - lists all packages with names"
                 android:textColor="@color/black" />
 
             <TextView
@@ -33,7 +80,7 @@
                 android:text="-" />
 
             <View
-                android:id="@+id/divider"
+                android:id="@+id/divider1"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="?android:attr/listDivider" />
@@ -42,7 +89,7 @@
                 android:id="@+id/method2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="2: getGranted() - granted permissions for all packages"
+                android:text="2: getRequested() - requested permissions for all packages"
                 android:textColor="@color/black" />
 
             <TextView
@@ -57,20 +104,11 @@
                 android:layout_height="1dp"
                 android:background="?android:attr/listDivider" />
 
-            <EditText
-                android:id="@+id/packagenameinput"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Enter package name"
-                android:inputType="textPersonName"
-                android:maxLines="1" />
-
             <TextView
                 android:id="@+id/method3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="3: getRequested(package_name) - requested permissions for a specific package"
+                android:text="3: getGranted() - granted permissions for all packages"
                 android:textColor="@color/black" />
 
             <TextView
@@ -85,24 +123,6 @@
                 android:layout_height="1dp"
                 android:background="?android:attr/listDivider" />
 
-            <TextView
-                android:id="@+id/method4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="4: getGranted(package_name) - granted permissions for a specific package"
-                android:textColor="@color/black" />
-
-            <TextView
-                android:id="@+id/method4output"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="-" />
-
-            <View
-                android:id="@+id/divider4"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="?android:attr/listDivider" />
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
