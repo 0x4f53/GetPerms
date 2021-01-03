@@ -1,3 +1,3 @@
 # GetPerms
 
-A small library to get all permissions (and requested permissions) of packages.
+Android library to get all granted and requested permissions of installed packages.
