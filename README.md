@@ -4,8 +4,7 @@ Android library to get all granted and requested permissions of installed packag
 
 To use _GetPerms_ with your project
 
-
-1. Add this in your project root `build.gradle` at the end of repositories:
+1. Add this in your project root level `build.gradle` at the end of repositories:
 ```
 allprojects {
     repositories {
@@ -15,7 +14,7 @@ allprojects {
 }
 ```
 
-2. Add the dependency in the app `build.gradle`:
+2. Add the dependency in your app level `build.gradle`:
 ```
 dependencies {
     // add along with other dependencies
