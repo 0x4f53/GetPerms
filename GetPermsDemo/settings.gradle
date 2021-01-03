@@ -1,2 +1,3 @@
 rootProject.name = "GetPerms-Demo"
 include ':app'
+include ':GetPerms'
