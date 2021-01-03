@@ -6,7 +6,7 @@ android {
     compileSdkVersion 30
 
     defaultConfig {
-        applicationId "com.example.getperms_demo"
+        applicationId "com.owais.getperms_demo"
         minSdkVersion 29
         targetSdkVersion 30
         versionCode 1

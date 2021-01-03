@@ -39,7 +39,8 @@
                 android:id="@+id/method1output"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Enter package name above." />
+                android:text="Enter package name above."
+                android:textIsSelectable="true" />
 
             <View
                 android:id="@+id/divider1"
@@ -58,7 +59,8 @@
                 android:id="@+id/method2output"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Enter package name above." />
+                android:text="Enter package name above."
+                android:textIsSelectable="true" />
 
             <View
                 android:id="@+id/divider2"
@@ -77,7 +79,8 @@
                 android:id="@+id/method3output"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Enable from source code." />
+                android:text="Enable from source code."
+                android:textIsSelectable="true" />
 
             <View
                 android:id="@+id/divider3"
@@ -96,7 +99,8 @@
                 android:id="@+id/method4output"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Enable from source code." />
+                android:text="Enable from source code."
+                android:textIsSelectable="true" />
 
             <View
                 android:id="@+id/divider4"
@@ -115,7 +119,8 @@
                 android:id="@+id/method5output"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Enable from source code." />
+                android:text="Enable from source code."
+                android:textIsSelectable="true" />
 
             <View
                 android:id="@+id/divider5"

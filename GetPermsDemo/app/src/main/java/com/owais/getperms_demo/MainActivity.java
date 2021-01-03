@@ -1,4 +1,4 @@
-package com.example.getperms_demo;
+package com.owais.getperms_demo;
 
 import android.os.Bundle;
 import android.view.KeyEvent;
