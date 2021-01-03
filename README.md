@@ -8,7 +8,7 @@ To use _GetPerms_ with your project
 ```
 allprojects {
     repositories {
-      ...
+      // add at the end
       maven { url 'https://jitpack.io' }
     }
 }
