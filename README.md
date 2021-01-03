@@ -4,6 +4,7 @@ Android library to get all granted and requested permissions of installed packag
 
 To use _GetPerms_ with your project
 
+
 1. Add this in your root `build.gradle` at the end of repositories:
 ```
 allprojects {
@@ -17,9 +18,11 @@ allprojects {
 2. Add the dependency
 ```
 dependencies {
-    implementation 'com.gitlab.thomascat:GetPerms:Tag'
+    implementation 'com.gitlab.ThomasCat:GetPerms:<TAG VERSION>'
 }
 ```
+
+_where `<TAG VERSION>` is the latest release tag available (this can be found in the [Tags](https://gitlab.com/ThomasCat/getperms/-/tags) page)._
 
 **Usage**: [check out the Wiki](https://gitlab.com/ThomasCat/getperms/-/wikis/)
 
