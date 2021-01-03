@@ -9,4 +9,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### [1.0] - 2020-01-3
 #### Added
 - Added library.
-- Added new method listPackages to list package names with application names.
+- Added new method to list package names with application names.
