@@ -59,31 +59,13 @@ public class GetPerms {
             requested_perms.put(package_name, permissions_array);
         } catch (PackageManager.NameNotFoundException noPackage){
             Log.e("GetPerms", "Package not found on system!");
-            Toast toast=Toast.makeText(context,"Package not found!",Toast.LENGTH_SHORT);
-            toast.show();
         } catch (NullPointerException noPermissions){
             Log.e("GetPerms", "Package requests no permissions!");
         }
         return new JSONObject(requested_perms);
     }
 
-    public JSONObject getRequested() {  // method to get all requested permissions from all packages
-        HashMap<String, String> perms = new HashMap<>();
-        final PackageManager pm = context.getPackageManager();
-        try {
-            List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
-            for (ApplicationInfo packageInfo : packages) {
-                perms.put(packageInfo.packageName, getRequested(packageInfo.packageName).toString());
-            }
-        } catch (Exception ex) {
-            Log.e("GetPerms", "Package not found on system!");
-            Toast toast=Toast.makeText(context,"Package not found!",Toast.LENGTH_SHORT);
-            toast.show();
-        }
-        return new JSONObject(perms);
-    }
-
-    public JSONObject getGranted(String package_name) {
+    public JSONObject getGranted(String package_name) {  // method to get all granted permissions for a particular package
         HashMap<String, String[]> granted_perms = new HashMap<>();
         final PackageManager pm = context.getPackageManager();
         try{
@@ -111,26 +93,38 @@ public class GetPerms {
 
         } catch (PackageManager.NameNotFoundException noPackage){
             Log.e("GetPerms", "Package not found on system!");
-            Toast toast=Toast.makeText(context,"Package not found!",Toast.LENGTH_SHORT);
-            toast.show();
         } catch (NullPointerException noPermissions){
             Log.e("GetPerms", "Package requests no permissions!");
         }
         return new JSONObject(granted_perms);
     }
 
-    public JSONObject getGranted() {  // method to get all granted permissions for a particular package
-        HashMap<String, String> perms = new HashMap<>();
+    public JSONObject getRequested() {  // method to get all requested permissions from all packages
+        HashMap<String, JSONArray> perms = new HashMap<>();
         final PackageManager pm = context.getPackageManager();
         try {
             List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
             for (ApplicationInfo packageInfo : packages) {
-                perms.put(packageInfo.packageName, getGranted(packageInfo.packageName).toString());
+                Log.d("GetPerms requested | package name:", packageInfo.packageName);
+                perms.put(packageInfo.packageName, getRequested(packageInfo.packageName).getJSONArray(packageInfo.packageName));
             }
-        } catch (Exception ex) {
-            Log.e("GetPerms", "Package not found on system!");
-            Toast toast=Toast.makeText(context,"Package not found!",Toast.LENGTH_SHORT);
-            toast.show();
+        } catch (JSONException noData) {
+            Log.e("GetPerms", "No data received!");
+        }
+        return new JSONObject(perms);
+    }
+
+    public JSONObject getGranted() {  // method to get all granted permissions for a particular package
+        HashMap<String, JSONArray> perms = new HashMap<>();
+        final PackageManager pm = context.getPackageManager();
+        try {
+            List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
+            for (ApplicationInfo packageInfo : packages) {
+                Log.d("GetPerms granted | package name:", packageInfo.packageName);
+                perms.put(packageInfo.packageName, getGranted(packageInfo.packageName).getJSONArray(packageInfo.packageName));
+            }
+        } catch (JSONException noData) {
+            Log.e("GetPerms", "No data received!");
         }
         return new JSONObject(perms);
     }
