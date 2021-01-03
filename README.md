@@ -1,6 +1,6 @@
 # GetPerms
 
-Android library to get all granted and requested permissions of installed packages.
+Android library to get all granted and requested permissions, written in Java.
 
 To use _GetPerms_ with your project
 
