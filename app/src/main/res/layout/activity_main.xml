@@ -1,4 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+ * MIT License
+ *
+ * Copyright (c) 2020 Owais Shaikh
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+-->
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -20,46 +43,95 @@
             android:orientation="vertical">
 
             <EditText
-                android:id="@+id/packagenameinput"
+                android:id="@+id/appNameInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Enter package name"
-                android:inputType="textPersonName"
+                android:hint="Search app"
+                android:inputType="text"
                 android:maxLines="1" />
 
             <TextView
-                android:id="@+id/method1"
+                android:id="@+id/getAppNameLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="1: getRequested(package_name) - requested permissions for a specific package"
+                android:text=" ▸ getAppID(application_name) - get app ID for an app"
                 android:textColor="@color/black" />
 
             <TextView
-                android:id="@+id/method1output"
+                android:id="@+id/getAppIDOutput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Enter package name above."
+                android:text="Enter search terms above."
                 android:textIsSelectable="true" />
 
             <View
-                android:id="@+id/divider1"
+                android:id="@+id/divider9"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider" />
+
+            <EditText
+                android:id="@+id/appIDInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Enter application ID"
+                android:inputType="textUri"
+                android:maxLines="1" />
+
+            <TextView
+                android:id="@+id/getAppIDLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=" ▸ getAppName(application_id) - get an app's name from app ID"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/getAppNameOutput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Enter application ID above"
+                android:textIsSelectable="true" />
+
+            <View
+                android:id="@+id/divider7"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="?android:attr/listDivider" />
 
             <TextView
-                android:id="@+id/method2"
+                android:id="@+id/getSignatureLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="2: getGranted(package_name) - granted permissions for a specific package"
+                android:text=" ▸ getSignature(application_id) - get an application's SHA signature"
                 android:textColor="@color/black" />
 
             <TextView
-                android:id="@+id/method2output"
+                android:id="@+id/getSignatureOutput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Enter package name above."
+                android:text="Enter application ID above"
+                android:textIsSelectable="true" />
+
+            <View
+                android:id="@+id/divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider" />
+
+            <TextView
+                android:id="@+id/getRequestedLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=" ▸ getRequested(application_id) - requested permissions for a specific application"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/getRequestedOutput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Enter application ID above"
                 android:textIsSelectable="true" />
 
             <View
@@ -69,17 +141,17 @@
                 android:background="?android:attr/listDivider" />
 
             <TextView
-                android:id="@+id/method3"
+                android:id="@+id/getGrantedLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="3: listPackages() - lists all packages with names"
+                android:text=" ▸ getGranted(application_id) - granted permissions for a specific application"
                 android:textColor="@color/black" />
 
             <TextView
-                android:id="@+id/method3output"
+                android:id="@+id/getGrantedOutput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Enable from source code."
+                android:text="Enter application ID above"
                 android:textIsSelectable="true" />
 
             <View
@@ -88,18 +160,94 @@
                 android:layout_height="1dp"
                 android:background="?android:attr/listDivider" />
 
-            <TextView
-                android:id="@+id/method4"
+            <EditText
+                android:id="@+id/permissionNameInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="4: getRequested() - requested permissions for all packages"
+                android:ems="10"
+                android:hint="Enter permission name"
+                android:inputType="textUri"
+                android:maxLines="1" />
+
+            <TextView
+                android:id="@+id/appsRequestingLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=" ▸ appsRequesting(permission_name) - get applications requesting a specific permission"
                 android:textColor="@color/black" />
 
             <TextView
-                android:id="@+id/method4output"
+                android:id="@+id/appsRequestingOutput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Enable from source code."
+                android:text="Enter permission name above."
+                android:textIsSelectable="true" />
+
+            <View
+                android:id="@+id/divider10"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider" />
+
+            <TextView
+                android:id="@+id/appsGrantedLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=" ▸ appsGranted(permission_name) - get applications granted a specific permission"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/appsGrantedOutput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Enter permission name above."
+                android:textIsSelectable="true" />
+
+            <View
+                android:id="@+id/divider8"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider" />
+
+            <Button
+                android:id="@+id/otherFunctionsButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Demo other functions" />
+
+            <TextView
+                android:id="@+id/noOfAppsLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=" ▸ noOfApps() - number of applications installed"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/noOfAppsOutput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tap 'Demo Other Functions' to view"
+                android:textIsSelectable="true" />
+
+            <View
+                android:id="@+id/divider11"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider" />
+
+            <TextView
+                android:id="@+id/getAppIDAllLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=" ▸ getAppID() - lists all applications with their IDs"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/getAppIDAllOutput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tap 'Demo Other Functions' to view"
                 android:textIsSelectable="true" />
 
             <View
@@ -109,21 +257,41 @@
                 android:background="?android:attr/listDivider" />
 
             <TextView
-                android:id="@+id/method5"
+                android:id="@+id/getRequestedAllLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="5: getGranted() - granted permissions for all packages"
+                android:text=" ▸ getRequested() - requested permissions for all applications"
                 android:textColor="@color/black" />
 
             <TextView
-                android:id="@+id/method5output"
+                android:id="@+id/getRequestedAllOutput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Enable from source code."
+                android:text="Tap 'Demo Other Functions' to view"
                 android:textIsSelectable="true" />
 
             <View
                 android:id="@+id/divider5"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider" />
+
+            <TextView
+                android:id="@+id/getGrantedAllLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=" ▸ getGranted() - granted permissions for all applications"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/getGrantedAllOutput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tap 'Demo Other Functions' to view"
+                android:textIsSelectable="true" />
+
+            <View
+                android:id="@+id/divider6"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="?android:attr/listDivider" />

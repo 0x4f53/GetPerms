@@ -18,11 +18,11 @@ allprojects {
 ```
 dependencies {
     // add along with other dependencies
-    implementation 'com.gitlab.ThomasCat:GetPerms:<TAG VERSION>'
+    implementation 'com.gitlab.ThomasCat:GetPerms:+'
 }
 ```
 
-_where `<TAG VERSION>` is the latest release tag available (this can be found in the [Tags](https://gitlab.com/ThomasCat/getperms/-/tags) page)._
+_where `+` is the latest [release tag](https://gitlab.com/ThomasCat/getperms/-/tags) available._
 
 **Usage**: [check out the Wiki](https://gitlab.com/ThomasCat/getperms/-/wikis/)
 
