@@ -2,7 +2,7 @@
 
 Android library to get all granted and requested permissions for installed apps, written in Java. [Get the demo here](/app/build/outputs/apk/debug/app-debug.apk).
 
-**How to use:**: [check out the Wiki](https://gitlab.com/ThomasCat/getperms/-/wikis/)
+**How to use:** [check out the Wiki](https://gitlab.com/ThomasCat/getperms/-/wikis/)
 
 To add _GetPerms_ to your project
 
