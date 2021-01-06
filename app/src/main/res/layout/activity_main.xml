@@ -47,26 +47,33 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Search app"
+                android:hint="@string/search_app"
                 android:inputType="text"
-                android:maxLines="1" />
+                android:maxLines="1"
+                android:autofillHints="@string/search_app" />
+
+            <View
+                android:id="@+id/divider9"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider" />
 
             <TextView
                 android:id="@+id/getAppNameLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text=" ▸ getAppID(application_name) - get app ID for an app"
-                android:textColor="@color/black" />
+                android:text="@string/get_app_id_application_name"
+                android:textColor="?attr/actionMenuTextColor" />
 
             <TextView
                 android:id="@+id/getAppIDOutput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Enter search terms above."
+                android:text="@string/enter_search_terms"
                 android:textIsSelectable="true" />
 
             <View
-                android:id="@+id/divider9"
+                android:id="@+id/divider15"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="?android:attr/listDivider" />
@@ -76,22 +83,29 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Enter application ID"
-                android:inputType="textUri"
-                android:maxLines="1" />
+                android:hint="@string/enter_application_id"
+                android:inputType="text"
+                android:maxLines="1"
+                android:autofillHints="@+id/appIDInput" />
+
+            <View
+                android:id="@+id/divider14"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider" />
 
             <TextView
                 android:id="@+id/getAppIDLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text=" ▸ getAppName(application_id) - get an app's name from app ID"
-                android:textColor="@color/black" />
+                android:text="@string/get_app_name_application_id"
+                android:textColor="?attr/actionMenuTextColor" />
 
             <TextView
                 android:id="@+id/getAppNameOutput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Enter application ID above"
+                android:text="@string/enter_app_id"
                 android:textIsSelectable="true" />
 
             <View
@@ -101,17 +115,17 @@
                 android:background="?android:attr/listDivider" />
 
             <TextView
-                android:id="@+id/getSignatureLabel"
+                android:id="@+id/getCertHashCodeLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text=" ▸ getSignature(application_id) - get an application's SHA signature"
-                android:textColor="@color/black" />
+                android:text="@string/get_cert_hash_code_application_id"
+                android:textColor="?attr/actionMenuTextColor" />
 
             <TextView
-                android:id="@+id/getSignatureOutput"
+                android:id="@+id/getCertHashCodeOutput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Enter application ID above"
+                android:text="@string/enter_app_id"
                 android:textIsSelectable="true" />
 
             <View
@@ -121,17 +135,58 @@
                 android:background="?android:attr/listDivider" />
 
             <TextView
+                android:id="@+id/getInstallationDateLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/get_installation_date_application_id"
+                android:textColor="?attr/actionMenuTextColor" />
+
+            <TextView
+                android:id="@+id/getInstallationDateOutput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/enter_app_id"
+                android:textIsSelectable="true" />
+
+            <View
+                android:id="@+id/divider17"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider" />
+
+            <TextView
+                android:id="@+id/getLastUpdatedDateLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/get_last_updated_date_application_id"
+                android:textColor="?attr/actionMenuTextColor" />
+
+            <TextView
+                android:id="@+id/getLastUpdatedDateOutput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/enter_app_id"
+                android:textIsSelectable="true" />
+
+            <View
+                android:id="@+id/divider16"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider" />
+
+
+            <TextView
                 android:id="@+id/getRequestedLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text=" ▸ getRequested(application_id) - requested permissions for a specific application"
-                android:textColor="@color/black" />
+                android:text="@string/get_requested_application_id"
+                android:textColor="?attr/actionMenuTextColor" />
 
             <TextView
                 android:id="@+id/getRequestedOutput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Enter application ID above"
+                android:text="@string/enter_app_id"
                 android:textIsSelectable="true" />
 
             <View
@@ -144,14 +199,14 @@
                 android:id="@+id/getGrantedLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text=" ▸ getGranted(application_id) - granted permissions for a specific application"
-                android:textColor="@color/black" />
+                android:text="@string/get_granted_application_id"
+                android:textColor="?attr/actionMenuTextColor" />
 
             <TextView
                 android:id="@+id/getGrantedOutput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Enter application ID above"
+                android:text="@string/enter_app_id"
                 android:textIsSelectable="true" />
 
             <View
@@ -165,22 +220,29 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Enter permission name"
-                android:inputType="textUri"
-                android:maxLines="1" />
+                android:hint="@string/enter_permission_name_input"
+                android:inputType="text"
+                android:maxLines="1"
+                android:autofillHints="@+id/appIDInput" />
+
+            <View
+                android:id="@+id/divider13"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider" />
 
             <TextView
                 android:id="@+id/appsRequestingLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text=" ▸ appsRequesting(permission_name) - get applications requesting a specific permission"
-                android:textColor="@color/black" />
+                android:text="@string/apps_requesting_permission_name"
+                android:textColor="?attr/actionMenuTextColor" />
 
             <TextView
                 android:id="@+id/appsRequestingOutput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Enter permission name above."
+                android:text="@string/enter_permission_name"
                 android:textIsSelectable="true" />
 
             <View
@@ -193,14 +255,14 @@
                 android:id="@+id/appsGrantedLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text=" ▸ appsGranted(permission_name) - get applications granted a specific permission"
-                android:textColor="@color/black" />
+                android:text="@string/apps_granted_permission_name"
+                android:textColor="?attr/actionMenuTextColor" />
 
             <TextView
                 android:id="@+id/appsGrantedOutput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Enter permission name above."
+                android:text="@string/enter_permission_name"
                 android:textIsSelectable="true" />
 
             <View
@@ -210,24 +272,30 @@
                 android:background="?android:attr/listDivider" />
 
             <Button
-                android:id="@+id/otherFunctionsButton"
+                android:id="@+id/otherMethodsButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Demo other functions" />
+                android:text="@string/demo_methods_button" />
+
+            <View
+                android:id="@+id/divider12"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider" />
 
             <TextView
                 android:id="@+id/noOfAppsLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text=" ▸ noOfApps() - number of applications installed"
-                android:textColor="@color/black" />
+                android:text="@string/no_of_apps"
+                android:textColor="?attr/actionMenuTextColor" />
 
             <TextView
                 android:id="@+id/noOfAppsOutput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Tap 'Demo Other Functions' to view"
+                android:text="@string/tap_demo_methods"
                 android:textIsSelectable="true" />
 
             <View
@@ -240,14 +308,14 @@
                 android:id="@+id/getAppIDAllLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text=" ▸ getAppID() - lists all applications with their IDs"
-                android:textColor="@color/black" />
+                android:text="@string/get_app_id"
+                android:textColor="?attr/actionMenuTextColor" />
 
             <TextView
                 android:id="@+id/getAppIDAllOutput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Tap 'Demo Other Functions' to view"
+                android:text="@string/tap_demo_methods"
                 android:textIsSelectable="true" />
 
             <View
@@ -260,14 +328,14 @@
                 android:id="@+id/getRequestedAllLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text=" ▸ getRequested() - requested permissions for all applications"
-                android:textColor="@color/black" />
+                android:text="@string/get_requested"
+                android:textColor="?attr/actionMenuTextColor" />
 
             <TextView
                 android:id="@+id/getRequestedAllOutput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Tap 'Demo Other Functions' to view"
+                android:text="@string/tap_demo_methods"
                 android:textIsSelectable="true" />
 
             <View
@@ -280,14 +348,14 @@
                 android:id="@+id/getGrantedAllLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text=" ▸ getGranted() - granted permissions for all applications"
-                android:textColor="@color/black" />
+                android:text="@string/get_granted"
+                android:textColor="?attr/actionMenuTextColor" />
 
             <TextView
                 android:id="@+id/getGrantedAllOutput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Tap 'Demo Other Functions' to view"
+                android:text="@string/tap_demo_methods"
                 android:textIsSelectable="true" />
 
             <View

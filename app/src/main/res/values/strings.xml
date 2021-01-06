@@ -1,3 +1,24 @@
 <resources>
     <string name="app_name">GetPerms Demo</string>
+    <string name="enter_app_id">Enter application ID above</string>
+    <string name="enter_permission_name">Enter permission name above</string>
+    <string name="enter_search_terms">Enter search terms</string>
+    <string name="tap_demo_methods">Tap \'Demo Methods Below\' to view</string>
+    <string name="demo_methods_button">Demo Methods Below</string>
+    <string name="search_app">Search app</string>
+    <string name="get_app_id_application_name">▸ getAppID(application_name) - get app ID for an app</string>
+    <string name="enter_application_id">Enter application ID</string>
+    <string name="get_app_name_application_id">▸ getAppName(application_id) - get an app\'s name from app ID</string>
+    <string name="get_cert_hash_code_application_id">▸ getCertHashCode(application_id) - get an app\'s signing certificate\'s hash code</string>
+    <string name="get_installation_date_application_id">▸ getInstallationDate(application_id) - get an app\'s first installation date</string>
+    <string name="get_last_updated_date_application_id">▸ getLastUpdatedDate(application_id) - get when an app was last updated</string>
+    <string name="get_requested_application_id">▸ getRequested(application_id) - requested permissions for a specific app</string>
+    <string name="get_granted_application_id">▸ getGranted(application_id) - granted permissions for a specific app</string>
+    <string name="enter_permission_name_input">Enter permission name</string>
+    <string name="apps_requesting_permission_name">▸ appsRequesting(permission_name) - get apps requesting a specific permission</string>
+    <string name="apps_granted_permission_name">▸ appsGranted(permission_name) - get apps granted a specific permission</string>
+    <string name="no_of_apps">▸ noOfApps() - get number of apps installed</string>
+    <string name="get_app_id">▸ getAppID() - lists all apps with their IDs</string>
+    <string name="get_requested">▸ getRequested() - requested permissions for all apps</string>
+    <string name="get_granted">▸ getGranted() - granted permissions for all apps</string>
 </resources>

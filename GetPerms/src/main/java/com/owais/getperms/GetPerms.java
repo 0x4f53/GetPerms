@@ -38,14 +38,19 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
+
 import static android.content.pm.PackageManager.GET_PERMISSIONS;
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 
@@ -64,6 +69,30 @@ public class GetPerms {
             no_of_apps++;
         }
         return no_of_apps;
+    }
+
+    public LocalDateTime getInstallationDate(String application_id) {  // method which shows when an application was first installed
+        long installDate = 0;
+        try {
+            installDate = context.getPackageManager().getPackageInfo(application_id, 0).firstInstallTime;
+            Log.e("GetPerms > getInstallationDate()", String.valueOf(installDate));
+        } catch (PackageManager.NameNotFoundException noPackage) {
+            Log.e("GetPerms > getInstallationDate()", "Could not find package(s)!");
+        }
+        return Instant.ofEpochMilli(installDate).atZone(ZoneId.systemDefault()).toLocalDateTime();
+    }
+
+    public LocalDateTime getLastUpdatedDate(String application_id) {  // method which shows when an application was last updated
+        long lastUpdated = 0;
+        try {
+            PackageManager pm = context.getPackageManager();
+            ApplicationInfo appInfo = pm.getApplicationInfo(application_id, 0);
+            String appFile = appInfo.sourceDir;
+            lastUpdated = new File(appFile).lastModified();
+        } catch (PackageManager.NameNotFoundException noPackage) {
+            Log.e("GetPerms > getInstallationDate()", "Could not find package(s)!");
+        }
+        return Instant.ofEpochMilli(lastUpdated).atZone(ZoneId.systemDefault()).toLocalDateTime();
     }
 
     public JSONObject getAppID() {  // method to list all applications with their ID
@@ -105,7 +134,7 @@ public class GetPerms {
             while(keys.hasNext()) {
                 String key = (String) keys.next();
                 Object value = all_packages.get(key);
-                if (((String) value).equals(application_id)){
+                if (value.equals(application_id)){
                     app_name = key;
                 }
             }
@@ -115,7 +144,7 @@ public class GetPerms {
         return app_name;
     }
 
-    public String getSignature(String application_id) {  // method to get an application's signature.
+    public String getCertHashCode(String application_id) {  // method to get an application's signing certificate's hash code.
         final PackageManager pm = context.getPackageManager();
         String signatureBase64 = "";
         try {

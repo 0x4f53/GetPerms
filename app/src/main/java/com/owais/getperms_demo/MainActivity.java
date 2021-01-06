@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
         TextView getAppNameOutput = findViewById(R.id.getAppNameOutput);
         TextView getAppIDOutput = findViewById(R.id.getAppIDOutput);
-        TextView getSignatureOutput = findViewById(R.id.getSignatureOutput);
+        TextView getSignatureOutput = findViewById(R.id.getCertHashCodeOutput);
         TextView getRequestedOutput = findViewById(R.id.getRequestedOutput);
         TextView getGrantedOutput = findViewById(R.id.getGrantedOutput);
         TextView noOfAppsOutput = findViewById(R.id.noOfAppsOutput);
@@ -56,8 +56,10 @@ public class MainActivity extends AppCompatActivity {
         TextView getGrantedAllOutput = findViewById(R.id.getGrantedAllOutput);
         TextView appsRequestingOutput = findViewById(R.id.appsRequestingOutput);
         TextView appsGrantedOutput = findViewById(R.id.appsGrantedOutput);
+        TextView getInstallationDateOutput = findViewById(R.id.getInstallationDateOutput);
+        TextView getLastUpdatedDateOutput = findViewById(R.id.getLastUpdatedDateOutput);
 
-        Button otherFunctionsButton = findViewById(R.id.otherFunctionsButton);
+        Button otherMethodsButton = findViewById(R.id.otherMethodsButton);
 
         GetPerms gp = new GetPerms(this);
 
@@ -73,9 +75,11 @@ public class MainActivity extends AppCompatActivity {
             if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
                 String appID = appIDInput.getText().toString();
                 getAppNameOutput.setText(gp.getAppName(appID));
-                getSignatureOutput.setText(gp.getSignature(appID));
+                getSignatureOutput.setText(gp.getCertHashCode(appID));
                 getRequestedOutput.setText(gp.getRequested(appID).toString());
                 getGrantedOutput.setText(gp.getGranted(appID).toString());
+                getInstallationDateOutput.setText(String.valueOf(gp.getInstallationDate(appID)));
+                getLastUpdatedDateOutput.setText(String.valueOf(gp.getLastUpdatedDate(appID)));
             }
             return false;
         });
@@ -89,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
             return false;
         });
 
-        otherFunctionsButton.setOnClickListener(v -> {
+        otherMethodsButton.setOnClickListener(v -> {
             Toast toast = Toast.makeText(this,"Please wait, this could take a while...", Toast.LENGTH_LONG);
             toast.setGravity(Gravity.CENTER, 0, 0);
             toast.show();

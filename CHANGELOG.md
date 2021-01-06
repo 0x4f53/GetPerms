@@ -6,9 +6,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Release]
 
-### [2.0] - 2021-01-04
+### [3.0] - 2021-01-07
 #### Added
-- Added method to generate application signature.
+- Added method to get the date and time of when an application was installed.
+- Added method to get the date and time of when an application was last updated.
+
+### [2.0] - 2021-01-06
+#### Added
+- Added method to generate application signing certificate hash code.
 - Added method to search for application ID by application name.
 - Added method to get application name based on application ID.
 - Added method to check if an application requests a specific permission.
