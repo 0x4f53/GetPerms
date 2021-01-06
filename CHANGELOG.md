@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### [2.0] - 2021-01-04
 #### Added
-- Added new method to generate application signature.
+- Added method to generate application signature.
 - Added method to search for application ID by application name.
 - Added method to get application name based on application ID.
 - Added method to check if an application requests a specific permission.

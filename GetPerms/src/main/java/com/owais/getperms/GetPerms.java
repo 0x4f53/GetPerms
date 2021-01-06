@@ -66,7 +66,7 @@ public class GetPerms {
         return no_of_apps;
     }
 
-    public JSONObject getAppID() {  // method to list all applications.
+    public JSONObject getAppID() {  // method to list all applications with their ID
         final PackageManager pm = context.getPackageManager();
         HashMap<String, String> perms = new HashMap<>();
         try {
@@ -80,7 +80,7 @@ public class GetPerms {
         return new JSONObject(perms);
     }
 
-    public String getAppID(String application_name) {  // method to get application name based on a substring.
+    public String getAppID(String application_name) {  // method to get an application's ID based on its name
         JSONObject all_packages = getAppID();
         String package_name = null;
         for (int i = 0; i< Objects.requireNonNull(all_packages.names()).length(); i++) {
@@ -97,7 +97,7 @@ public class GetPerms {
         return package_name;
     }
 
-    public String getAppName(String application_id) {  // method to get application name based on a substring.
+    public String getAppName(String application_id) {  // method to get application name based on application ID
         JSONObject all_packages = getAppID();
         String app_name = null;
         Iterator<?> keys = all_packages.keys();
@@ -186,7 +186,7 @@ public class GetPerms {
         return new JSONObject(granted_perms);
     }
 
-    public JSONObject getRequested() {  // method to get all requested permissions from all application.
+    public JSONObject getRequested() {  // method to get all requested permissions from all applications.
         final PackageManager pm = context.getPackageManager();
         HashMap<String, JSONArray> perms = new HashMap<>();
         @SuppressLint("QueryPermissionsNeeded") List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
@@ -214,7 +214,7 @@ public class GetPerms {
         return new JSONObject(perms);
     }
 
-    public boolean isRequesting(String application_id, String permission_name) {  // method to check if an application requests specific permission.
+    public boolean isRequesting(String application_id, String permission_name) {  // method to check if an application requests a specified permission.
         boolean flag = false;
         try{
             PackageInfo packageInfo = context.getPackageManager().getPackageInfo(application_id, GET_PERMISSIONS);
@@ -240,7 +240,7 @@ public class GetPerms {
         return flag;
     }
 
-    public boolean isGranted(String application_id, String permission_name) {  // method to check if a specific permission is granted to an application.
+    public boolean isGranted(String application_id, String permission_name) {  // method to check if a specified permission is granted to an application.
         final PackageManager pm = context.getPackageManager();
         boolean flag = false;
         try{
