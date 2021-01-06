@@ -56,7 +56,7 @@ public class GetPerms {
         context = context_argument;
     }
 
-    public int noOfApps() {  // method to get all requested permissions from all packages.
+    public int noOfApps() {  // method to list the number of installed applications
         int no_of_apps = 0;
         final PackageManager pm = context.getPackageManager();
         @SuppressLint("QueryPermissionsNeeded") List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
@@ -66,7 +66,7 @@ public class GetPerms {
         return no_of_apps;
     }
 
-    public JSONObject getAppID() {  // method to list all packages.
+    public JSONObject getAppID() {  // method to list all applications.
         final PackageManager pm = context.getPackageManager();
         HashMap<String, String> perms = new HashMap<>();
         try {
@@ -80,7 +80,7 @@ public class GetPerms {
         return new JSONObject(perms);
     }
 
-    public String getAppID(String application_name) {  // method to get package name based on a substring.
+    public String getAppID(String application_name) {  // method to get application name based on a substring.
         JSONObject all_packages = getAppID();
         String package_name = null;
         for (int i = 0; i< Objects.requireNonNull(all_packages.names()).length(); i++) {
@@ -97,7 +97,7 @@ public class GetPerms {
         return package_name;
     }
 
-    public String getAppName(String application_id) {  // method to get package name based on a substring.
+    public String getAppName(String application_id) {  // method to get application name based on a substring.
         JSONObject all_packages = getAppID();
         String app_name = null;
         Iterator<?> keys = all_packages.keys();
@@ -115,7 +115,7 @@ public class GetPerms {
         return app_name;
     }
 
-    public String getSignature(String application_id) {  // method to get a package's signature.
+    public String getSignature(String application_id) {  // method to get an application's signature.
         final PackageManager pm = context.getPackageManager();
         String signatureBase64 = "";
         try {
@@ -134,7 +134,7 @@ public class GetPerms {
         return signatureBase64;
     }
 
-    public JSONObject getRequested(String application_id) {  // method to get all requested permissions for a particular package.
+    public JSONObject getRequested(String application_id) {  // method to get all requested permissions for a particular application.
         HashMap<String, String[]> requested_perms = new HashMap<>();
         try{
             PackageInfo packageInfo = context.getPackageManager().getPackageInfo(application_id, GET_PERMISSIONS);
@@ -155,7 +155,7 @@ public class GetPerms {
         return new JSONObject(requested_perms);
     }
 
-    public JSONObject getGranted(String application_id) {  // method to get all granted permissions for a particular package.
+    public JSONObject getGranted(String application_id) {  // method to get all granted permissions for a particular application.
         final PackageManager pm = context.getPackageManager();
         HashMap<String, String[]> granted_perms = new HashMap<>();
         try{
@@ -186,7 +186,7 @@ public class GetPerms {
         return new JSONObject(granted_perms);
     }
 
-    public JSONObject getRequested() {  // method to get all requested permissions from all packages.
+    public JSONObject getRequested() {  // method to get all requested permissions from all application.
         final PackageManager pm = context.getPackageManager();
         HashMap<String, JSONArray> perms = new HashMap<>();
         @SuppressLint("QueryPermissionsNeeded") List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
@@ -200,7 +200,7 @@ public class GetPerms {
         return new JSONObject(perms);
     }
 
-    public JSONObject getGranted() {  // method to get all granted permissions from all packages
+    public JSONObject getGranted() {  // method to get all granted permissions from all applications.
         final PackageManager pm = context.getPackageManager();
         HashMap<String, JSONArray> perms = new HashMap<>();
         @SuppressLint("QueryPermissionsNeeded") List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
@@ -214,7 +214,7 @@ public class GetPerms {
         return new JSONObject(perms);
     }
 
-    public boolean isRequesting(String application_id, String permission_name) {  // method to check if a package requests specific permission.
+    public boolean isRequesting(String application_id, String permission_name) {  // method to check if an application requests specific permission.
         boolean flag = false;
         try{
             PackageInfo packageInfo = context.getPackageManager().getPackageInfo(application_id, GET_PERMISSIONS);
@@ -240,7 +240,7 @@ public class GetPerms {
         return flag;
     }
 
-    public boolean isGranted(String application_id, String permission_name) {  // method to check if a specific permission is granted to a package.
+    public boolean isGranted(String application_id, String permission_name) {  // method to check if a specific permission is granted to an application.
         final PackageManager pm = context.getPackageManager();
         boolean flag = false;
         try{
@@ -294,7 +294,7 @@ public class GetPerms {
         return new JSONObject(apps);
     }
 
-    public JSONObject appsGranted(String permission_name) {  // method to get applications requesting a specific permission type.
+    public JSONObject appsGranted(String permission_name) {  // method to get applications granted a specific permission type.
         final PackageManager pm = context.getPackageManager();
         HashMap<String, ArrayList<String>> apps = new HashMap<>();
         @SuppressLint("QueryPermissionsNeeded") List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
