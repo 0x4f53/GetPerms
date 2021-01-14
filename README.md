@@ -4,21 +4,27 @@ An Android library to get permissions that apps request, permissions you grant t
 
 ## DEMO / PREVIEW OF THE LIBRARY
 
-### Installing the demo
+### Installing the Demo App
 
-[A demo app can be found here](/app/build/outputs/apk/debug/app-debug.apk). The minimum API for the app is API29 / Android 10. 
+[A demo app can be found here](/app/build/outputs/apk/debug/app-debug.apk). The minimum API for the app is API29 / Android 10. Just install its APK and launch it.
 
 To get the latest build artifact, with the latest changes to the library, you can visit the [CI/CD jobs page](https://gitlab.com/ThomasCat/getperms/-/jobs) and grab whatever is on there.
 
-### Using the demo
+### Using the Demo
 
-To use it, just install the APK and open it. In the app, use the first box to search an application ID on your phone by entering the app's name (for example: Typing 'Gmail' gives `com.android.gm`). Entering this ID in the second box gives you some data about the app, including it's signature's hashcode, the date it was installed on, what permissions it requests and what you granted it. In the third text box, you can do a lookup of all the applications that request or have been granted a particular permission. Clicking the purple button shows you every single application, its requested and granted permission on your phone. (**Note:** clicking this button may slow your phone down for 10 seconds or so! The library isn't really meant to be used this way anyway.)
+In the app, use the first box to search for an application ID on your phone, by entering the app's name. Entering this ID in the second box gives you data about the app, including it's signature's hashcode, the date it was installed on, and JSON objects of what permissions it requests and what permissions were granted to it. In the third text box, you can do a reverse lookup of all the applications that request or are granted a particular permission. Clicking the purple button shows you every single application and its requested and granted permissions on your phone. (**Note:** clicking this button may slow your phone down for 10 seconds or so! The library isn't really meant to be used this way anyway.)
+
+For example, typing 'Gmail' in the first box gives `com.android.gm`. Typing `com.android.gm` in the second box gives you data about the Gmail app, including JSON objects of requested and granted permissions. You can select a permission from the results, such as `android.permission.MANAGE_ACCOUNTS`, by pressing and holding on it. Pasting this in the third box gives you JSON objects of other apps that request or are granted the _Accounts Management_ permission.
+
+
 
 ## ADDING / IMPORTING TO YOUR PROJECT
 
 This is a library written in Java, uploaded to https://jitpack.io. To use it with your project, add it via Gradle (or download it manually if you want to).
 
 To add _GetPerms_ to your project
+
+### Via Gradle
 
 1. Add this to your project-level (root) `build.gradle` at the end of `repositories`:
 ```
@@ -40,9 +46,24 @@ dependencies {
 
 _where `+` is the latest [release tag](https://gitlab.com/ThomasCat/getperms/-/tags) available._ The latest version on JitPack as of now is: [![](https://jitpack.io/v/com.gitlab.thomascat/GetPerms.svg)](https://jitpack.io/#com.gitlab.thomascat/GetPerms)
 
-## USAGE / SAMPLE IMPLEMENTATION
+### Via Direct Download
+
+1. Download library by clicking the _Download_ button at the top of this page.
+2. Extract the library.
+3. Open Android Studio and go to **File** → **New** → **Import Module**.
+5. Go to the extracted library's path (`/GetPerms-master/GetPerms`) and select it.
+6. Uncheck other modules and add `GetPerms`.
+7. Add the following Gradle dependency in your app-level `build.gradle`
+  ```
+  compile project(':GetPerms');
+  ```
+
+
+## USAGE / IMPLEMENTATING IN YOUR PROJECT
 
 To use this library, first create an object for it. An example of this is: `GetPerms object = new GetPerms(context);`, _where `context` is the application's context and `object` is the object name._
+
+### Included Methods and their Description
 
 This library contains the following methods:
 
@@ -71,7 +92,7 @@ GetPerms appScanner = new GetPerms(getApplicationContext());
 JSONObject granted_permissions = appScanner.getGranted ("com.google.android.apps.maps");
 ```
 
-The object `granted_permissions` now returns a JSON object with whatever permissions the user granted to the [Google Maps](https://play.google.com/store/apps/details?id=com.google.android.apps.maps) app. On a test emulator device running stock Android 11 (API 30), this returned:
+The object `granted_permissions` now returns a JSON object with whatever permissions the user granted to the Google Maps app. On a test emulator device running stock Android 11 (API 30), this returned:
 ```
 {
   "com.google.android.apps.maps":
@@ -105,9 +126,9 @@ The object `granted_permissions` now returns a JSON object with whatever permiss
 }
 ```
 
-You can use this data as you wish. You can store it to a database if you'd like, using something like [Google's JSON.simple](https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple).
+Use this data as you wish. You can store it to a database if you'd like, using something like [Google's JSON.simple](https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple).
 
-One interesting use case of this could be in a[ Security Information and Event Management (SIEM)](https://en.wikipedia.org/wiki/Security_information_and_event_management) application, where an employee's work phone can be monitored for malicious apps that may compromise security and incur loss to an organization.
+One interesting use case of this could be in a [Security Information and Event Management (SIEM)](https://en.wikipedia.org/wiki/Security_information_and_event_management) application, where an employee's work phone can be monitored for malicious apps that may compromise security and incur loss to an organization.
 
 ## Credits
 
@@ -117,11 +138,11 @@ One interesting use case of this could be in a[ Security Information and Event M
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on the code of conduct, and the process for submitting pull requests.
 
 ## Versioning
 
-We use [Semantic Versioning](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+This project uses [Semantic Versioning](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
 
 ## Authors
 
@@ -133,7 +154,5 @@ This project is licensed under the MIT License - see [LICENSE.md](LICENSE.md) fo
 
 ## Acknowledgments
 
-* [Xerfia](https://www.xerfia.com/), for the motivation and ass-kicking.
+* [Xerfia](https://www.xerfia.com/), for the motivation.
 * [Google](https://android.google.com), for letting us use Android liberally.
-
-
