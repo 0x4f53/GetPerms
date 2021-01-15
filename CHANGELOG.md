@@ -1,10 +1,16 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Release]
+
+### [4.0] - 2021-01-15
+#### Added
+- Added method to get application icon.
+- Fixed massive lag in demo application when tapping the 'Demo Methods Below' button.
+- Tidied JSON data display.
+- Lowered demo application compatibility to Android Pie (API28).
 
 ### [3.0] - 2021-01-07
 #### Added
@@ -23,5 +29,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### [1.0] - 2020-12-21
 #### Added
+- Added method to list all applications with their IDs.
+- Added method to list all applications and the permissions they request.
+- Added method to get all requested permissions for a specific application.
+- Added method to get all granted permissions for a specific application.
 - Released library publicly.
-- Added new method to list all applications with their IDs.

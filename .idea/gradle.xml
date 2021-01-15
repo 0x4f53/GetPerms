@@ -9,9 +9,9 @@
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="modules">
           <set>
-            <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/GetPerms" />
-            <option value="$PROJECT_DIR$/app" />
+            <option value="$USER_HOME$/AndroidStudioProjects/GetPerms" />
+            <option value="$USER_HOME$/AndroidStudioProjects/GetPerms/GetPerms" />
+            <option value="$USER_HOME$/AndroidStudioProjects/GetPerms/app" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

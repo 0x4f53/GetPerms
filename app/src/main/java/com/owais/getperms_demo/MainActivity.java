@@ -29,11 +29,17 @@ import android.view.Gravity;
 import android.view.KeyEvent;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import com.owais.getperms.GetPerms;
+
+import org.json.JSONException;
+
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 public class MainActivity extends AppCompatActivity {
     @Override
@@ -47,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
         TextView getAppNameOutput = findViewById(R.id.getAppNameOutput);
         TextView getAppIDOutput = findViewById(R.id.getAppIDOutput);
+        ImageView getAppIconOutput = findViewById(R.id.getAppIconOutput);
         TextView getSignatureOutput = findViewById(R.id.getCertHashCodeOutput);
         TextView getRequestedOutput = findViewById(R.id.getRequestedOutput);
         TextView getGrantedOutput = findViewById(R.id.getGrantedOutput);
@@ -75,9 +82,15 @@ public class MainActivity extends AppCompatActivity {
             if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
                 String appID = appIDInput.getText().toString();
                 getAppNameOutput.setText(gp.getAppName(appID));
+                getAppIconOutput.setImageDrawable(gp.getAppIcon(appID));
                 getSignatureOutput.setText(gp.getCertHashCode(appID));
-                getRequestedOutput.setText(gp.getRequested(appID).toString());
-                getGrantedOutput.setText(gp.getGranted(appID).toString());
+                try {
+                    getRequestedOutput.setText(gp.getRequested(appID).toString(4));
+                    getGrantedOutput.setText(gp.getGranted(appID).toString(4));
+                } catch (JSONException e) {
+                    Toast.makeText(this, "An error occurred. Please check logcat.", Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                }
                 getInstallationDateOutput.setText(String.valueOf(gp.getInstallationDate(appID)));
                 getLastUpdatedDateOutput.setText(String.valueOf(gp.getLastUpdatedDate(appID)));
             }
@@ -87,8 +100,12 @@ public class MainActivity extends AppCompatActivity {
         permissionNameInput.setOnKeyListener((v, keyCode, event) -> {
             if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
                 String permissionName = permissionNameInput.getText().toString();
-                appsRequestingOutput.setText(gp.appsRequesting(permissionName).toString());
-                appsGrantedOutput.setText(gp.appsGranted(permissionName).toString());
+                try {
+                    appsRequestingOutput.setText(gp.appsRequesting(permissionName).toString(4));
+                    appsGrantedOutput.setText(gp.appsGranted(permissionName).toString(4));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
             return false;
         });
@@ -97,10 +114,24 @@ public class MainActivity extends AppCompatActivity {
             Toast toast = Toast.makeText(this,"Please wait, this could take a while...", Toast.LENGTH_LONG);
             toast.setGravity(Gravity.CENTER, 0, 0);
             toast.show();
-            noOfAppsOutput.setText(String.valueOf(gp.noOfApps()));
-            listAppsByIDOutput.setText(gp.getAppID().toString());
-            getAppIDAllOutput.setText(gp.getRequested().toString());
-            getGrantedAllOutput.setText(gp.getGranted().toString());
+            Runnable otherMethods = () -> {
+                try {
+                    String noOfApps = String.valueOf(gp.noOfApps());
+                    String listAppsByID = gp.getAppID().toString(4);
+                    String getRequested = gp.getRequested().toString(4);
+                    String getGranted = gp.getGranted().toString(4);
+                    runOnUiThread(() -> {
+                        noOfAppsOutput.setText(noOfApps);
+                        listAppsByIDOutput.setText(listAppsByID);
+                        getAppIDAllOutput.setText(getRequested);
+                        getGrantedAllOutput.setText(getGranted);
+                    });
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            };
+            Executor otherMethodsExecutor = Executors.newSingleThreadExecutor();
+            otherMethodsExecutor.execute(otherMethods);
         });
     }
 }

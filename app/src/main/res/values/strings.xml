@@ -8,7 +8,7 @@
     <string name="search_app">Search app</string>
     <string name="get_app_id_application_name">▸ getAppID(application_name) - get app ID for an app</string>
     <string name="enter_application_id">Enter application ID</string>
-    <string name="get_app_name_application_id">▸ getAppName(application_id) - get an app\'s name from app ID</string>
+    <string name="get_app_name_application_id">▸ getAppName(application_id) and getAppIcon(application_id)- get an app\'s name and icon from app ID</string>
     <string name="get_cert_hash_code_application_id">▸ getCertHashCode(application_id) - get an app\'s signing certificate\'s hash code</string>
     <string name="get_installation_date_application_id">▸ getInstallationDate(application_id) - get an app\'s first installation date</string>
     <string name="get_last_updated_date_application_id">▸ getLastUpdatedDate(application_id) - get when an app was last updated</string>

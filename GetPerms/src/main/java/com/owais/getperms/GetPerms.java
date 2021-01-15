@@ -31,6 +31,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
+import android.graphics.drawable.Drawable;
 import android.util.Base64;
 import android.util.Log;
 
@@ -59,6 +60,16 @@ public class GetPerms {
 
     public GetPerms(Context context_argument){
         context = context_argument;
+    }
+
+    public Drawable getAppIcon(String application_id) {  // method to get the icon of an application
+        Drawable icon = null;
+        try {
+            icon = context.getPackageManager().getApplicationIcon(application_id);
+        } catch (PackageManager.NameNotFoundException noPackage) {
+            Log.e("GetPerms > getAppIcon()", "Could not find package(s)!");
+        }
+        return icon;
     }
 
     public int noOfApps() {  // method to list the number of installed applications
@@ -90,7 +101,7 @@ public class GetPerms {
             String appFile = appInfo.sourceDir;
             lastUpdated = new File(appFile).lastModified();
         } catch (PackageManager.NameNotFoundException noPackage) {
-            Log.e("GetPerms > getInstallationDate()", "Could not find package(s)!");
+            Log.e("GetPerms > getLastUpdatedDate()", "Could not find package(s)!");
         }
         return Instant.ofEpochMilli(lastUpdated).atZone(ZoneId.systemDefault()).toLocalDateTime();
     }
@@ -104,7 +115,7 @@ public class GetPerms {
                 perms.put((String) pm.getApplicationLabel(pm.getApplicationInfo(packageInfo.packageName, PackageManager.GET_META_DATA)),packageInfo.packageName);
             }
         } catch (PackageManager.NameNotFoundException noPackage){
-            Log.e("GetPerms > listAppsByID()", "Could not find package(s)!");
+            Log.e("GetPerms > getAppID()", "Could not find package(s)!");
         }
         return new JSONObject(perms);
     }
@@ -158,7 +169,7 @@ public class GetPerms {
         } catch (PackageManager.NameNotFoundException noPackage){
             Log.e("GetPerms", "Package not found on device!");
         } catch (NoSuchAlgorithmException noAlgo){
-            Log.e("GetPerms > getSignature()", "Cannot find SHA algorithm on device!");
+            Log.e("GetPerms > getCertHashCode()", "Cannot find SHA algorithm on device!");
         }
         return signatureBase64;
     }
@@ -334,7 +345,7 @@ public class GetPerms {
                     apps_list.add(packageInfo.packageName);
                 }
             } catch (NullPointerException noPermissions){
-                Log.e("GetPerms > getGranted()", "Package "+packageInfo.packageName+" requests no permissions!");
+                Log.e("GetPerms > appsGranted()", "Package "+packageInfo.packageName+" requests no permissions!");
             }
         }
         apps.put(permission_name, apps_list);
