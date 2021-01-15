@@ -68,7 +68,7 @@ To use this library, first add the following permission to your `AndroidManifest
         tools:ignore="QueryAllPackagesPermission" />
 ```
 
-then create an object for it using: `GetPerms object = new GetPerms(context);`, _where `context` is the application's context and `object` is the object name._
+then create an object for GetPerms in your Java or Kotlin file using: `GetPerms object = new GetPerms(context);`, _where `context` is the application's context and `object` is the object name._
 
 ### Included Methods and their Description
 
@@ -101,7 +101,7 @@ Add this to your project's `AndroidManifest.xml`:
         tools:ignore="QueryAllPackagesPermission" />
 ```
 
-Then create an object in your Java / Kotlin file as such:
+You can now create an object in your Java or Kotlin file as such:
 
 ```
 GetPerms appScanner = new GetPerms(getApplicationContext());
@@ -109,6 +109,7 @@ JSONObject granted_permissions = appScanner.getGranted ("com.google.android.apps
 ```
 
 The object `granted_permissions` now returns a JSON object with whatever permissions the user granted to the Google Maps app. On a test emulator device running stock Android 11 (API 30), this returned:
+
 ```
 {
   "com.google.android.apps.maps":
@@ -146,29 +147,29 @@ Use this data as you wish. You can store it to a database if you'd like, using s
 
 One interesting use case of this could be in a [Security Information and Event Management (SIEM)](https://en.wikipedia.org/wiki/Security_information_and_event_management) application, where an employee's work phone can be monitored for malicious apps that may compromise security and incur loss to an organization.
 
-## Credits
+## CREDITS
 
 * [JitPack](https://jitpack.io) - Hosting
 * [Android Studio](https://developer.android.com/studio/) - Development
 * [GitLab CI/CD](https://docs.gitlab.com/ee/ci/) - Demo builds
 
-## Contributing
+## CONTRIBUTING
 
 Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on the code of conduct, and the process for submitting pull requests.
 
-## Versioning
+## VERSIONING
 
 This project uses [Semantic Versioning](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
 
-## Authors
+## AUTHORS
 
 * **Owais Shaikh** - *Developer* - GitLab: [ThomasCat](https://gitlab.com/ThomasCat), GitHub: [4f77616973](https://github.com/4f77616973).
 
-## License
+## LICENSE
 
 This project is licensed under the MIT License - see [LICENSE.md](LICENSE.md) for details.
 
-## Acknowledgments
+## ACKNOWLEDGEMENT
 
 * [Xerfia](https://www.xerfia.com/), for the motivation.
-* [Google](https://android.google.com), for letting us use Android liberally.
+* [Google](https://android.google.com), for Android.
