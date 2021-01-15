@@ -143,7 +143,7 @@ The object `granted_permissions` now returns a JSON object with whatever permiss
 }
 ```
 
-Use this data as you wish. You can store it to a database if you'd like, using something like [Google's JSON.simple](https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple).
+Use this data as you wish. You can store it in a database if you'd like, using something like [Google's JSON.simple](https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple).
 
 One interesting use case of this could be in a [Security Information and Event Management (SIEM)](https://en.wikipedia.org/wiki/Security_information_and_event_management) application, where an employee's work phone can be monitored for malicious apps that may compromise security and incur loss to an organization.
 
