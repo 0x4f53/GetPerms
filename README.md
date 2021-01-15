@@ -14,9 +14,9 @@ To get the latest build artifact, with the latest changes to the library, you ca
 
 In the app, use the first box to search for an application ID on your phone, by entering the app's name. Entering this ID in the second box gives you data about the app, including it's signature's hashcode, the date it was installed on, and JSON objects of what permissions it requests and what permissions were granted to it. In the third text box, you can do a reverse lookup of all the applications that request or are granted a particular permission. Clicking the purple button shows you every single application and its requested and granted permissions on your phone. (**Note:** clicking this button may slow your phone down for 10 seconds or so! The library isn't really meant to be used this way anyway.)
 
-For example, typing 'Gmail' in the first box gives `com.android.gm`. Typing `com.android.gm` in the second box gives you data about the Gmail app, including JSON objects of requested and granted permissions. You can select a permission from the results, such as `android.permission.MANAGE_ACCOUNTS`, by pressing and holding on it. Pasting this in the third box gives you JSON objects of other apps that request or are granted the _Accounts Management_ permission.
 
 
+For example, typing 'YouTube' in the first box gives you `com.google.android.youtube`. Typing `com.google.android.youtube` in the second box gives you data about the Gmail app, including JSON objects of requested and granted permissions. You can select a permission from the results, such as `"android.permission.FOREGROUND_SERVICE"`, by pressing and holding on it. Pasting this in the third box gives you JSON objects of other apps that request or are granted the _Foreground Service_ permission.
 
 ## ADDING / IMPORTING TO YOUR PROJECT
 
