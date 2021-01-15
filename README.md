@@ -6,7 +6,7 @@ An Android library to get permissions that apps request, permissions you grant t
 
 ### Installing the Demo App
 
-[A demo app can be found here](/app/build/outputs/apk/debug/app-debug.apk). The minimum API for the app is API29 / Android 10. Just install its APK and launch it.
+[A demo app can be found here](/app/build/outputs/apk/debug/app-debug.apk). The minimum API for the app is API29 / Android 10. Install the APK file to your device and launch it.
 
 To get the latest build artifact, with the latest changes to the library, you can visit the [CI/CD jobs page](https://gitlab.com/ThomasCat/getperms/-/jobs) and grab whatever is on there.
 
@@ -14,7 +14,7 @@ To get the latest build artifact, with the latest changes to the library, you ca
 
 In the app, use the first box to search for an application ID on your phone, by entering the app's name. Entering this ID in the second box gives you data about the app, including it's signature's hashcode, the date it was installed on, and JSON objects of what permissions it requests and what permissions were granted to it. In the third text box, you can do a reverse lookup of all the applications that request or are granted a particular permission. Clicking the purple button shows you every single application and its requested and granted permissions on your phone. (**Note:** clicking this button may slow your phone down for 10 seconds or so! The library isn't really meant to be used this way anyway.)
 
-
+<img src="/demo.gif" alt="Demonstration video" width="240">
 
 For example, typing 'YouTube' in the first box gives you `com.google.android.youtube`. Typing `com.google.android.youtube` in the second box gives you data about the Gmail app, including JSON objects of requested and granted permissions. You can select a permission from the results, such as `"android.permission.FOREGROUND_SERVICE"`, by pressing and holding on it. Pasting this in the third box gives you JSON objects of other apps that request or are granted the _Foreground Service_ permission.
 
@@ -61,7 +61,14 @@ _where `+` is the latest [release tag](https://gitlab.com/ThomasCat/getperms/-/t
 
 ## USAGE / IMPLEMENTATING IN YOUR PROJECT
 
-To use this library, first create an object for it. An example of this is: `GetPerms object = new GetPerms(context);`, _where `context` is the application's context and `object` is the object name._
+To use this library, first add the following permission to your `AndroidManifest.xml`:
+
+```
+<uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"
+        tools:ignore="QueryAllPackagesPermission" />
+```
+
+then create an object for it using: `GetPerms object = new GetPerms(context);`, _where `context` is the application's context and `object` is the object name._
 
 ### Included Methods and their Description
 
@@ -86,6 +93,15 @@ This library contains the following methods:
 ### A Simple Example
 
 Let's try this with an inbuilt app on most phones, [Google Maps](https://play.google.com/store/apps/details?id=com.google.android.apps.maps). Of course, this can be used with third-party applications too.
+
+Add this to your project's `AndroidManifest.xml`:
+
+```
+<uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"
+        tools:ignore="QueryAllPackagesPermission" />
+```
+
+Then create an object in your Java / Kotlin file as such:
 
 ```
 GetPerms appScanner = new GetPerms(getApplicationContext());
