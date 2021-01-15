@@ -16,7 +16,7 @@ In the app, use the first box to search for an application ID on your phone, by 
 
 <img src="/demo.gif" alt="Demonstration video" width="240">
 
-For example, typing 'YouTube' in the first box gives you `com.google.android.youtube`. Typing `com.google.android.youtube` in the second box gives you data about the Gmail app, including JSON objects of requested and granted permissions. You can select a permission from the results, such as `"android.permission.FOREGROUND_SERVICE"`, by pressing and holding on it. Pasting this in the third box gives you JSON objects of other apps that request or are granted the _Foreground Service_ permission.
+For example, typing 'YouTube' in the first box gives you `com.google.android.youtube`. Typing `com.google.android.youtube` in the second box gives you data about the Gmail app, including JSON objects of requested and granted permissions. You can select a permission from the results, such as `android.permission.FOREGROUND_SERVICE`, by pressing and holding on it. Pasting this in the third box gives you JSON objects of other apps that request or are granted the _Foreground Service_ permission.
 
 ## ADDING / IMPORTING TO YOUR PROJECT
 
