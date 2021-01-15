@@ -8,7 +8,7 @@ An Android library to get permissions that apps request, permissions you grant t
 
 [A demo app can be found here](/app/build/outputs/apk/debug/app-debug.apk). The minimum API for the app is API29 / Android 10. Install the APK file to your device and launch it.
 
-To get the latest build artifact, with the latest changes to the library, you can visit the [CI/CD jobs page](https://gitlab.com/ThomasCat/getperms/-/jobs) and grab whatever is on there.
+To get the latest build artifact, with the latest changes to the library, you can visit the [CI / CD jobs page](https://gitlab.com/ThomasCat/getperms/-/jobs) and grab whatever is on there.
 
 ### Using the Demo
 
@@ -27,22 +27,22 @@ To add _GetPerms_ to your project
 ### Via Gradle
 
 1. Add this to your project-level (root) `build.gradle` at the end of `repositories`:
-```
-allprojects {
+  ```
+  allprojects {
     repositories {
       // add at the end
       maven { url 'https://jitpack.io' }
     }
-}
-```
+  }
+  ```
 
 2. Add the dependency to your app-level `build.gradle`:
-```
-dependencies {
+  ```
+  dependencies {
     // add along with other dependencies
     implementation 'com.gitlab.ThomasCat:GetPerms:+'
-}
-```
+  }
+  ```
 
 _where `+` is the latest [release tag](https://gitlab.com/ThomasCat/getperms/-/tags) available._ The latest version on JitPack as of now is: [![](https://jitpack.io/v/com.gitlab.thomascat/GetPerms.svg)](https://jitpack.io/#com.gitlab.thomascat/GetPerms)
 
@@ -54,19 +54,19 @@ _where `+` is the latest [release tag](https://gitlab.com/ThomasCat/getperms/-/t
 5. Go to the extracted library's path (`/GetPerms-master/GetPerms`) and select it.
 6. Uncheck other modules and add `GetPerms`.
 7. Add the following Gradle dependency in your app-level `build.gradle`
+  
   ```
   compile project(':GetPerms');
   ```
 
-
-## USAGE / IMPLEMENTATING IN YOUR PROJECT
+## USAGE / IMPLEMENTING IN YOUR PROJECT
 
 To use this library, first add the following permission to your `AndroidManifest.xml`:
 
-```
-<uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"
-        tools:ignore="QueryAllPackagesPermission" />
-```
+  ```
+  <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"
+    tools:ignore="QueryAllPackagesPermission" />
+  ```
 
 then create an object for GetPerms in your Java or Kotlin file using: `GetPerms object = new GetPerms(context);`, _where `context` is the application's context and `object` is the object name._
 
@@ -98,7 +98,7 @@ Add this to your project's `AndroidManifest.xml`:
 
 ```
 <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"
-        tools:ignore="QueryAllPackagesPermission" />
+  tools:ignore="QueryAllPackagesPermission" />
 ```
 
 You can now create an object in your Java or Kotlin file as such:
