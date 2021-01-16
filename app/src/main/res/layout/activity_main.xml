@@ -43,7 +43,7 @@
             android:orientation="vertical">
 
             <EditText
-                android:id="@+id/appNameInput"
+                android:id="@+id/appSearchInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -59,14 +59,43 @@
                 android:background="?android:attr/listDivider" />
 
             <TextView
-                android:id="@+id/getAppNameLabel"
+                android:id="@+id/appIDLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/get_app_id_application_name"
+                android:text="@string/app_id_application_name"
+                android:textColor="?attr/actionMenuTextColor" />
+
+            <ImageView
+                android:id="@+id/appIconOutput"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:contentDescription="@string/enter_application_id"
+                app:srcCompat="@android:mipmap/sym_def_app_icon" />
+
+            <TextView
+                android:id="@+id/appNameOutput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/enter_app_id"
+                android:textIsSelectable="true" />
+
+            <View
+                android:id="@+id/divider7"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider" />
+
+            <TextView
+                android:id="@+id/appSizeLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/app_size_application_name"
                 android:textColor="?attr/actionMenuTextColor" />
 
             <TextView
-                android:id="@+id/getAppIDOutput"
+                android:id="@+id/appSizeOutput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/enter_search_terms"
@@ -78,47 +107,22 @@
                 android:layout_height="1dp"
                 android:background="?android:attr/listDivider" />
 
-            <EditText
-                android:id="@+id/appIDInput"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/enter_application_id"
-                android:inputType="text"
-                android:maxLines="1"
-                android:autofillHints="@+id/appIDInput" />
-
-            <View
-                android:id="@+id/divider14"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="?android:attr/listDivider" />
-
             <TextView
-                android:id="@+id/getAppIDLabel"
+                android:id="@+id/appNameLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/get_app_name_application_id"
+                android:text="@string/app_name_application_id"
                 android:textColor="?attr/actionMenuTextColor" />
 
-            <ImageView
-                android:id="@+id/getAppIconOutput"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:contentDescription="@string/enter_application_id"
-                app:srcCompat="@android:mipmap/sym_def_app_icon" />
-
             <TextView
-                android:id="@+id/getAppNameOutput"
+                android:id="@+id/appIDOutput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/enter_app_id"
+                android:text="@string/enter_search_terms"
                 android:textIsSelectable="true" />
 
             <View
-                android:id="@+id/divider7"
+                android:id="@+id/divider14"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="?android:attr/listDivider" />
@@ -144,14 +148,14 @@
                 android:background="?android:attr/listDivider" />
 
             <TextView
-                android:id="@+id/getInstallationDateLabel"
+                android:id="@+id/installedOnLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/get_installation_date_application_id"
+                android:text="@string/installed_on_application_id"
                 android:textColor="?attr/actionMenuTextColor" />
 
             <TextView
-                android:id="@+id/getInstallationDateOutput"
+                android:id="@+id/installedOnOutput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/enter_app_id"
@@ -164,14 +168,14 @@
                 android:background="?android:attr/listDivider" />
 
             <TextView
-                android:id="@+id/getLastUpdatedDateLabel"
+                android:id="@+id/lastUpdatedLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/get_last_updated_date_application_id"
+                android:text="@string/last_updated_application_id"
                 android:textColor="?attr/actionMenuTextColor" />
 
             <TextView
-                android:id="@+id/getLastUpdatedDateOutput"
+                android:id="@+id/lastUpdatedOutput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/enter_app_id"
@@ -314,14 +318,14 @@
                 android:background="?android:attr/listDivider" />
 
             <TextView
-                android:id="@+id/getAppIDAllLabel"
+                android:id="@+id/appIDAllLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/get_app_id"
                 android:textColor="?attr/actionMenuTextColor" />
 
             <TextView
-                android:id="@+id/getAppIDAllOutput"
+                android:id="@+id/appIDAllOutput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/tap_demo_methods"
@@ -329,6 +333,26 @@
 
             <View
                 android:id="@+id/divider4"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider" />
+
+            <TextView
+                android:id="@+id/appSizeAllLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/app_size_all"
+                android:textColor="?attr/actionMenuTextColor" />
+
+            <TextView
+                android:id="@+id/appSizeAllOutput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/tap_demo_methods"
+                android:textIsSelectable="true" />
+
+            <View
+                android:id="@+id/divider18"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="?android:attr/listDivider" />

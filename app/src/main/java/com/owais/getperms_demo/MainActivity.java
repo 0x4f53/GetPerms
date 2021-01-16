@@ -24,15 +24,16 @@
 
 package com.owais.getperms_demo;
 
+import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.KeyEvent;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import com.owais.getperms.GetPerms;
 
@@ -47,24 +48,25 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        EditText appNameInput = findViewById(R.id.appNameInput);
-        EditText appIDInput = findViewById(R.id.appIDInput);
+        EditText appNameInput = findViewById(R.id.appSearchInput);
         EditText permissionNameInput = findViewById(R.id.permissionNameInput);
 
-        TextView getAppNameOutput = findViewById(R.id.getAppNameOutput);
-        TextView getAppIDOutput = findViewById(R.id.getAppIDOutput);
-        ImageView getAppIconOutput = findViewById(R.id.getAppIconOutput);
+        TextView appNameOutput = findViewById(R.id.appNameOutput);
+        TextView appIDOutput = findViewById(R.id.appIDOutput);
+        ImageView appIconOutput = findViewById(R.id.appIconOutput);
+        TextView appSizeOutput = findViewById(R.id.appSizeOutput);
         TextView getSignatureOutput = findViewById(R.id.getCertHashCodeOutput);
         TextView getRequestedOutput = findViewById(R.id.getRequestedOutput);
         TextView getGrantedOutput = findViewById(R.id.getGrantedOutput);
         TextView noOfAppsOutput = findViewById(R.id.noOfAppsOutput);
-        TextView listAppsByIDOutput = findViewById(R.id.getAppIDAllOutput);
+        TextView listAppsByIDOutput = findViewById(R.id.appIDAllOutput);
         TextView getAppIDAllOutput = findViewById(R.id.getRequestedAllOutput);
         TextView getGrantedAllOutput = findViewById(R.id.getGrantedAllOutput);
         TextView appsRequestingOutput = findViewById(R.id.appsRequestingOutput);
         TextView appsGrantedOutput = findViewById(R.id.appsGrantedOutput);
-        TextView getInstallationDateOutput = findViewById(R.id.getInstallationDateOutput);
-        TextView getLastUpdatedDateOutput = findViewById(R.id.getLastUpdatedDateOutput);
+        TextView installedOnOutput = findViewById(R.id.installedOnOutput);
+        TextView lastUpdatedOutput = findViewById(R.id.lastUpdatedOutput);
+        TextView appSizeAllOutput = findViewById(R.id.appSizeAllOutput);
 
         Button otherMethodsButton = findViewById(R.id.otherMethodsButton);
 
@@ -72,27 +74,32 @@ public class MainActivity extends AppCompatActivity {
 
         appNameInput.setOnKeyListener((v, keyCode, event) -> {
             if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                String appName = appNameInput.getText().toString();
-                getAppIDOutput.setText(gp.getAppID(appName));
-            }
-            return false;
-        });
-
-        appIDInput.setOnKeyListener((v, keyCode, event) -> {
-            if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                String appID = appIDInput.getText().toString();
-                getAppNameOutput.setText(gp.getAppName(appID));
-                getAppIconOutput.setImageDrawable(gp.getAppIcon(appID));
+                String searchTerms = appNameInput.getText().toString();
+                if (!gp.isInstalled(gp.appID(searchTerms))) {
+                    new AlertDialog.Builder(this)
+                            .setTitle("Error")
+                            .setMessage("Application not found!")
+                            .setPositiveButton("Retry", (dialog, which) -> {
+                                finish();
+                                startActivity(getIntent());
+                                overridePendingTransition(0, 0);
+                            }).show();
+                }
+                String appID = gp.appID(searchTerms);
+                appIDOutput.setText(appID);
+                appNameOutput.setText(gp.appName(appID));
+                String unit = "MB";
+                appSizeOutput.setText(String.valueOf(gp.appSize(appID, unit)).concat(unit));
+                appIconOutput.setImageDrawable(gp.appIcon(appID));
                 getSignatureOutput.setText(gp.getCertHashCode(appID));
                 try {
                     getRequestedOutput.setText(gp.getRequested(appID).toString(4));
                     getGrantedOutput.setText(gp.getGranted(appID).toString(4));
-                } catch (JSONException e) {
-                    Toast.makeText(this, "An error occurred. Please check logcat.", Toast.LENGTH_SHORT).show();
+                } catch (JSONException | NullPointerException e) {
                     e.printStackTrace();
                 }
-                getInstallationDateOutput.setText(String.valueOf(gp.getInstallationDate(appID)));
-                getLastUpdatedDateOutput.setText(String.valueOf(gp.getLastUpdatedDate(appID)));
+                installedOnOutput.setText(String.valueOf(gp.installedOn(appID)));
+                lastUpdatedOutput.setText(String.valueOf(gp.lastUpdated(appID)));
             }
             return false;
         });
@@ -111,20 +118,26 @@ public class MainActivity extends AppCompatActivity {
         });
 
         otherMethodsButton.setOnClickListener(v -> {
-            Toast toast = Toast.makeText(this,"Please wait, this could take a while...", Toast.LENGTH_LONG);
-            toast.setGravity(Gravity.CENTER, 0, 0);
-            toast.show();
+            ProgressDialog pleaseWait = new ProgressDialog(this);
+            pleaseWait.setCancelable(false);
+            pleaseWait.setMessage("Please wait...");
+            pleaseWait.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            pleaseWait.setProgress(0);
+            pleaseWait.show();
             Runnable otherMethods = () -> {
                 try {
                     String noOfApps = String.valueOf(gp.noOfApps());
-                    String listAppsByID = gp.getAppID().toString(4);
+                    String listAppsByID = gp.appID().toString(4);
                     String getRequested = gp.getRequested().toString(4);
                     String getGranted = gp.getGranted().toString(4);
+                    String appSize = gp.appSize().toString(4);
                     runOnUiThread(() -> {
                         noOfAppsOutput.setText(noOfApps);
                         listAppsByIDOutput.setText(listAppsByID);
                         getAppIDAllOutput.setText(getRequested);
                         getGrantedAllOutput.setText(getGranted);
+                        appSizeAllOutput.setText(appSize);
+                        pleaseWait.dismiss();
                     });
                 } catch (JSONException e) {
                     e.printStackTrace();

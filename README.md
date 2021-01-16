@@ -12,7 +12,7 @@ To get the latest build artifact, with the latest changes to the library, you ca
 
 ### Using the Demo App
 
-In the app, use the first box to search for an application ID on your phone, by entering the app's name. Entering this ID in the second box gives you data about the app, including it's signature's hashcode, the date it was installed on, and JSON objects of what permissions it requests and what permissions were granted to it. In the third text box, you can do a reverse lookup of all the applications that request or are granted a particular permission. Clicking the 'Demo Methods Below' button shows you every single application and its requested and granted permissions on your phone. (**Note:** clicking this button may take a while to show results.)
+In the app, use the first box, enter an app's name on your phone to search for it. This gives you data about the app, including it's ID, name, signature's hashcode, the date it was installed on, and JSON objects of what permissions it requests and what permissions were granted to it. In the next text box, you can do a reverse lookup of all applications that request or are granted a particular permission. Clicking the 'Demo Methods Below' button shows you every single application and its requested and granted permissions on your phone. (**Note:** clicking this button may take a while to show results.)
 
 <img src="/demo.gif" alt="Demonstration video" width="240">
 
@@ -61,48 +61,43 @@ _where `+` is the latest [release tag](https://gitlab.com/ThomasCat/getperms/-/t
 
 ## USAGE / IMPLEMENTING IN YOUR PROJECT
 
-To use this library, first add the following permission to your `AndroidManifest.xml`:
-
-  ```
-  <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"
-    tools:ignore="QueryAllPackagesPermission" />
-  ```
-
-then create an object for GetPerms in your Java or Kotlin file using: `GetPerms object = new GetPerms(context);`, _where `context` is the application's context and `object` is the object name._
+To use this library create an object for GetPerms in your Java or Kotlin file using: `GetPerms object = new GetPerms(context);`, _where `context` is the application's context and `object` is the object name._
 
 ### Included Methods
 
 This library contains the following methods:
 
 - `int noOfApps()` : list the number of installed applications.
-- `JSONObject getAppID()` : list all applications by their ID.
-- `String getAppID(String application_name)` : get an application's ID based on its name (Eg: _Gmail_).
-- `String getAppName(String application_id)` : get an application's name based on its ID (Eg: `com.google.android.gm`).
-- `Drawable getAppIcon(String application_id)` : get the icon of an application.
-- `String getCertHashCode(String application_id)` : get an application's signing certificate's hash code (SHA hash code, looks like gibberish to humans).
-- `JSONObject getRequested(String application_id)` : get all requested permissions for a particular application.
-- `JSONObject getGranted(String application_id)` : get all granted permissions for a particular application.
-- `JSONObject getRequested()` : get all requested permissions from all applications.
-- `JSONObject getGranted()` : get all granted permissions from all applications.
+
+- `BigInteger appSize(String application_id)` : get an application's size (Bytes by default).
+- `BigInteger appSize(String application_id, String unit)` : get an application's size in a specific unit (where `unit` can be _kB_, _MB_, _GB_, _TB_, _KiB_, _MiB_ and _TiB_).
+
+- `Drawable appIcon(String application_id)` : get the icon of an application.
+
+- `LocalDateTime installatedOn(String application_id)` : show when an application was first installed.
+- `LocalDateTime lastUpdated(String application_id)` : show when an application was last updated.
+
+- `boolean isInstalled(String application_id)` : check if an application is installed.
 - `boolean isRequesting(String application_id, String permission_name)` : check if an application requests specified permission (Eg: `android.permission.BLUETOOTH`).
 - `boolean isGranted(String application_id, String permission_name)` : check if a specified permission is granted to an application.
+
+- `String appID(String application_name)` : get an application's ID based on its name (Eg: _Gmail_).
+- `String appName(String application_id)` : get an application's name based on its ID (Eg: `com.google.android.gm`).
+- `String getCertHashCode(String application_id)` : get an application's signing certificate's hash code (SHA hash code, looks like gibberish to humans).
+
+- `JSONObject appID()` : list all applications by their ID.
 - `JSONObject appsRequesting(String permission_name)` : get all applications requesting a specified permission.
 - `JSONObject appsGranted(String permission_name)` : get applications granted a specified permission.
-- `LocalDateTime getInstallationDate(String application_id)` : show when an application was first installed.
-- `LocalDateTime getLastUpdatedDate(String application_id)` : show when an application was last updated.
+- `JSONObject getRequested(String application_id)` : get all requested permissions for a particular application.
+- `JSONObject getRequested()` : get all requested permissions from all applications.
+- `JSONObject getGranted(String application_id)` : get all granted permissions for a particular application.
+- `JSONObject getGranted()` : get all granted permissions from all applications.
 
 ### A Simple Example
 
 Let's try this with an inbuilt app on most phones, [Google Maps](https://play.google.com/store/apps/details?id=com.google.android.apps.maps). Of course, this can be used with third-party applications too.
 
-Add this to your project's `AndroidManifest.xml`:
-
-```
-<uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"
-  tools:ignore="QueryAllPackagesPermission" />
-```
-
-You can now create an object in your Java or Kotlin file as such:
+Create an object in your Java or Kotlin file as such:
 
 ```
 GetPerms appScanner = new GetPerms(getApplicationContext());

@@ -8,7 +8,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### [4.0] - 2021-01-15
 #### Added
 - Added method to get application icon.
-- Fixed massive lag in demo application when tapping the 'Demo Methods Below' button.
+- Added method to get application size.
+- Added method to check if an application is installed.
+- Renamed some methods.
+- Fixed lag in demo application when tapping the 'Demo Methods Below' button.
 - Tidied JSON data display.
 - Lowered demo application compatibility to Android Pie (API28).
 
