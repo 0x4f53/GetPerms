@@ -78,6 +78,7 @@ This library contains the following methods:
 - `JSONObject getAppID()` : list all applications by their ID.
 - `String getAppID(String application_name)` : get an application's ID based on its name (Eg: _Gmail_).
 - `String getAppName(String application_id)` : get an application's name based on its ID (Eg: `com.google.android.gm`).
+- `Drawable getAppIcon(String application_id)` : get the icon of an application.
 - `String getCertHashCode(String application_id)` : get an application's signing certificate's hash code (SHA hash code, looks like gibberish to humans).
 - `JSONObject getRequested(String application_id)` : get all requested permissions for a particular application.
 - `JSONObject getGranted(String application_id)` : get all granted permissions for a particular application.
