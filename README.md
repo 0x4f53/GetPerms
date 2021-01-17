@@ -169,7 +169,7 @@ This project uses [Semantic Versioning](http://semver.org/) for versioning. For 
 
 ## LICENSE
 
-This project is licensed under the MIT License - see [LICENSE.md](LICENSE.md) for details.
+This project is licensed under the MIT License - see [LICENSE](LICENSE) for details.
 
 ## ACKNOWLEDGEMENT
 
