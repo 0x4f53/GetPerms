@@ -24,8 +24,9 @@
 
 package com.owais.getperms_demo;
 
-import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.widget.Button;
@@ -67,6 +68,9 @@ public class MainActivity extends AppCompatActivity {
         TextView installedOnOutput = findViewById(R.id.installedOnOutput);
         TextView lastUpdatedOutput = findViewById(R.id.lastUpdatedOutput);
         TextView appSizeAllOutput = findViewById(R.id.appSizeAllOutput);
+
+        TextView GetPermsSource = findViewById(R.id.GetPerms_Source);
+        TextView GetPermsVersion = findViewById(R.id.GetPerms_Version);
 
         Button otherMethodsButton = findViewById(R.id.otherMethodsButton);
 
@@ -144,6 +148,11 @@ public class MainActivity extends AppCompatActivity {
             };
             Executor otherMethodsExecutor = Executors.newSingleThreadExecutor();
             otherMethodsExecutor.execute(otherMethods);
+        });
+        GetPermsVersion.setText("v ".concat(BuildConfig.VERSION_NAME));
+        GetPermsSource.setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(getResources().getString(R.string.source_code)));
+            startActivity(intent);
         });
     }
 }

@@ -397,6 +397,26 @@
                 android:layout_height="1dp"
                 android:background="?android:attr/listDivider" />
 
+            <TextView
+                android:id="@+id/GetPerms_Source"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="monospace"
+                android:text="@string/source_code"
+                android:textIsSelectable="true"
+                android:textStyle="italic" />
+
+            <TextView
+                android:id="@+id/GetPerms_Version"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:foregroundGravity="center"
+                android:text="@string/version"
+                android:textIsSelectable="true"
+                android:textStyle="bold|italic" />
+
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
