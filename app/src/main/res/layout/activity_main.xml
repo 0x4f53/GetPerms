@@ -70,7 +70,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:contentDescription="@string/enter_application_id"
+                android:contentDescription="@string/enter_search_terms"
                 app:srcCompat="@android:mipmap/sym_def_app_icon" />
 
             <TextView
@@ -78,7 +78,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="@string/enter_app_id"
+                android:text="@string/enter_search_terms"
                 android:textIsSelectable="true" />
 
             <View
