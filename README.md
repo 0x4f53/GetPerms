@@ -67,7 +67,7 @@ _where `+` is the latest [release tag](https://gitlab.com/ThomasCat/getperms/-/t
 
 ## USAGE / IMPLEMENTING IN YOUR PROJECT
 
-To use this library create an object for GetPerms in your Java or Kotlin file using: `GetPerms object = new GetPerms(context);`, _where `context` is the application's context and `object` is the object name._
+To use this library create an object for GetPerms in your Java or Kotlin file using: `GetPerms object = new GetPerms(context);`, _where `context` is the application's context and `object` is the object name._ You can then use call methods from the library as explained further.
 
 ### Included Methods
 
@@ -101,16 +101,21 @@ This library contains the following methods:
 
 ### A Simple Example
 
-Let's try this with an inbuilt app on most phones, [Google Maps](https://play.google.com/store/apps/details?id=com.google.android.apps.maps). Of course, this can be used with third-party applications too.
+Let's try this with an in-built app on most phones, [Google Maps](https://play.google.com/store/apps/details?id=com.google.android.apps.maps). Of course, this can be used with third-party apps too.
 
-Create an object in your Java or Kotlin file as such:
+Create an object (here, `appScanner`) in your Java file as such
 
 ```
 GetPerms appScanner = new GetPerms(getApplicationContext());
+```
+
+To get granted permissions, we need to invoke `getGranted()` from the newly created object, which is of type `JSONObject`, and supply the Google Maps app's application ID. So we first create a JSON object named `granted_permissions`, and supply the application ID as a parameter (_com.google.android.apps.maps_) to `getGranted` as shown below
+
+```
 JSONObject granted_permissions = appScanner.getGranted ("com.google.android.apps.maps");
 ```
 
-The object `granted_permissions` now returns a JSON object with whatever permissions the user granted to the Google Maps app. On a test emulator device running stock Android 11 (API 30), this returned:
+The object `granted_permissions` now returns a JSON object with whatever permissions the user granted to the Google Maps app. On a test emulator device running stock Android 11 (API 30), this returned
 
 ```
 {
