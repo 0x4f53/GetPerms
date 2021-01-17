@@ -74,7 +74,7 @@ This library contains the following methods:
 
 - `Drawable appIcon(String application_id)` : get the icon of an application.
 
-- `LocalDateTime installatedOn(String application_id)` : show when an application was first installed.
+- `LocalDateTime installedOn(String application_id)` : show when an application was first installed.
 - `LocalDateTime lastUpdated(String application_id)` : show when an application was last updated.
 
 - `boolean isInstalled(String application_id)` : check if an application is installed.
