@@ -79,11 +79,10 @@ public class MainActivity extends AppCompatActivity {
                     new AlertDialog.Builder(this)
                             .setTitle("Error")
                             .setMessage("Application not found!")
-                            .setPositiveButton("Retry", (dialog, which) -> {
-                                finish();
-                                startActivity(getIntent());
-                                overridePendingTransition(0, 0);
-                            }).show();
+                            .setPositiveButton("Retry", (dialog, which) -> {}).show();
+                            finish();
+                            startActivity(getIntent());
+                            overridePendingTransition(0, 0);
                 }
                 String appID = gp.appID(searchTerms);
                 appIDOutput.setText(appID);
