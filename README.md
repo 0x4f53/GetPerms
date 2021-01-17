@@ -70,7 +70,7 @@ This library contains the following methods:
 - `int noOfApps()` : list the number of installed applications.
 
 - `BigInteger appSize(String application_id)` : get an application's size (Bytes by default).
-- `BigInteger appSize(String application_id, String unit)` : get an application's size in a specific unit (where `unit` can be _kB_, _MB_, _GB_, _TB_, _KiB_, _MiB_ and _TiB_).
+- `BigDecimal appSize(String application_id, String unit)` : get an application's size in a specific unit (where `unit` can be _kB_, _MB_, _GB_, _TB_, _KiB_, _MiB_ and _TiB_).
 
 - `Drawable appIcon(String application_id)` : get the icon of an application.
 
