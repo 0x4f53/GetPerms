@@ -1,3 +1,9 @@
+[![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/Naereen/StrapDown.js/blob/master/LICENSE)
+[![JitPack](https://jitpack.io/v/com.gitlab.thomascat/GetPerms.svg)](https://jitpack.io/#com.gitlab.thomascat/GetPerms)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-Yes-green.svg)](https://GitHub.com/Naereen/StrapDown.js/graphs/commit-activity)
+[![Java](https://img.shields.io/badge/Made%20with-Java-1f425f.svg)](https://java.com)
+![Profile views](https://gpvc.arturio.dev/4f77616973)
+
 # GetPerms
 
 An Android library to get permissions that apps request, permissions you grant them explicitly and more. 
@@ -155,7 +161,7 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on the code of conduc
 
 ## VERSIONING
 
-This project uses [Semantic Versioning](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+This project uses [Semantic Versioning](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://gitlab.com/ThomasCat/GetPerms/tags).
 
 ## AUTHORS
 

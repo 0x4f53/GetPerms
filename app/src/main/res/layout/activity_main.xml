@@ -404,7 +404,8 @@
                 android:layout_gravity="center"
                 android:fontFamily="monospace"
                 android:text="@string/source_code"
-                android:textIsSelectable="true"
+                android:textColor="@android:color/holo_blue_dark"
+                android:textSize="10sp"
                 android:textStyle="italic" />
 
             <TextView
@@ -414,7 +415,8 @@
                 android:layout_gravity="center"
                 android:foregroundGravity="center"
                 android:text="@string/version"
-                android:textIsSelectable="true"
+                android:textColor="@android:color/holo_blue_dark"
+                android:textSize="10sp"
                 android:textStyle="bold|italic" />
 
         </LinearLayout>

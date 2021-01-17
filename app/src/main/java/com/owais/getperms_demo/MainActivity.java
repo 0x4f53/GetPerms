@@ -69,10 +69,10 @@ public class MainActivity extends AppCompatActivity {
         TextView lastUpdatedOutput = findViewById(R.id.lastUpdatedOutput);
         TextView appSizeAllOutput = findViewById(R.id.appSizeAllOutput);
 
+        Button otherMethodsButton = findViewById(R.id.otherMethodsButton);
+
         TextView GetPermsSource = findViewById(R.id.GetPerms_Source);
         TextView GetPermsVersion = findViewById(R.id.GetPerms_Version);
-
-        Button otherMethodsButton = findViewById(R.id.otherMethodsButton);
 
         GetPerms gp = new GetPerms(this);
 
