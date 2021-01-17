@@ -67,8 +67,8 @@
 
             <ImageView
                 android:id="@+id/appIconOutput"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
                 android:layout_gravity="center"
                 android:contentDescription="@string/enter_search_terms"
                 app:srcCompat="@android:mipmap/sym_def_app_icon" />
@@ -138,7 +138,7 @@
                 android:id="@+id/getCertHashCodeOutput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/enter_app_id"
+                android:text="@string/enter_search_terms"
                 android:textIsSelectable="true" />
 
             <View
@@ -158,7 +158,7 @@
                 android:id="@+id/installedOnOutput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/enter_app_id"
+                android:text="@string/enter_search_terms"
                 android:textIsSelectable="true" />
 
             <View
@@ -178,7 +178,7 @@
                 android:id="@+id/lastUpdatedOutput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/enter_app_id"
+                android:text="@string/enter_search_terms"
                 android:textIsSelectable="true" />
 
             <View
@@ -199,7 +199,7 @@
                 android:id="@+id/getRequestedOutput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/enter_app_id"
+                android:text="@string/enter_search_terms"
                 android:textIsSelectable="true" />
 
             <View
@@ -219,7 +219,7 @@
                 android:id="@+id/getGrantedOutput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/enter_app_id"
+                android:text="@string/enter_search_terms"
                 android:textIsSelectable="true" />
 
             <View
@@ -405,7 +405,7 @@
                 android:fontFamily="monospace"
                 android:text="@string/source_code"
                 android:textColor="@android:color/holo_blue_dark"
-                android:textSize="10sp"
+                android:textSize="12sp"
                 android:textStyle="italic" />
 
             <TextView
@@ -416,7 +416,7 @@
                 android:foregroundGravity="center"
                 android:text="@string/version"
                 android:textColor="@android:color/holo_blue_dark"
-                android:textSize="10sp"
+                android:textSize="12sp"
                 android:textStyle="bold|italic" />
 
         </LinearLayout>

@@ -59,16 +59,16 @@ import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 public class GetPerms {
     Context context;
 
-    public GetPerms(Context context_argument){
+    public GetPerms (Context context_argument){
         context = context_argument;
     }
 
-    public Drawable appIcon(String application_id) {  // method to get the icon of an application
+    public Drawable appIcon (String application_id) {  // method to get the icon of an application
         Drawable icon = null;
         try {
             icon = context.getPackageManager().getApplicationIcon(application_id);
         } catch (PackageManager.NameNotFoundException noPackage) {
-            Log.e("GetPerms > appIcon()", "Could not find package(s)!");
+            Log.e ("GetPerms > appIcon()", "Could not find package(s)!");
         }
         return icon;
     }
@@ -83,7 +83,7 @@ public class GetPerms {
         return no_of_apps;
     }
 
-    public LocalDateTime installedOn(String application_id) {  // method which shows when an application was first installed
+    public LocalDateTime installedOn (String application_id) {  // method which shows when an application was first installed
         long installDate;
         try {
             installDate = context.getPackageManager().getPackageInfo(application_id, 0).firstInstallTime;
@@ -95,7 +95,7 @@ public class GetPerms {
         return Instant.ofEpochMilli(installDate).atZone(ZoneId.systemDefault()).toLocalDateTime();
     }
 
-    public LocalDateTime lastUpdated(String application_id) {  // method which shows when an application was last updated
+    public LocalDateTime lastUpdated (String application_id) {  // method which shows when an application was last updated
         long lastUpdated;
         try {
             PackageManager pm = context.getPackageManager();
@@ -124,10 +124,10 @@ public class GetPerms {
         return new JSONObject(perms);
     }
 
-    public String appID(String application_name) {  // method to get an application's ID based on its name
+    public String appID (String application_name) {  // method to get an application's ID based on its name
         JSONObject all_packages = appID();
         String package_name = "";
-        for (int i = 0; i < Objects.requireNonNull(all_packages.names()).length(); i++) {
+        for ( int i = 0; i < Objects.requireNonNull(all_packages.names()).length(); i++ ) {
             try {
                 String key = Objects.requireNonNull(all_packages.names()).getString(i);
                 if (key.toLowerCase().equals(application_name.toLowerCase())) {
@@ -142,12 +142,12 @@ public class GetPerms {
         return package_name;
     }
 
-    public String appName(String application_id) {  // method to get application name based on application ID
+    public String appName (String application_id) {  // method to get application name based on application ID
         JSONObject all_packages = appID();
         String app_name = "";
         Iterator<?> keys = all_packages.keys();
         try{
-            while(keys.hasNext()) {
+            while (keys.hasNext()) {
                 String key = (String) keys.next();
                 Object value = all_packages.get(key);
                 if (value.equals(application_id)){
@@ -161,7 +161,7 @@ public class GetPerms {
         return app_name;
     }
 
-    public String getCertHashCode(String application_id) {  // method to get an application's signing certificate's hash code.
+    public String getCertHashCode (String application_id) {  // method to get an application's signing certificate's hash code.
         final PackageManager pm = context.getPackageManager();
         String signatureBase64 = "";
         try {
@@ -182,7 +182,7 @@ public class GetPerms {
         return signatureBase64;
     }
 
-    public BigDecimal appSize(String application_id, String unit) {  // method to get an application's size.
+    public BigDecimal appSize (String application_id, String unit) {  // method to get an application's size.
         BigDecimal size = appSize(application_id);
         try {
             if (unit.toLowerCase().contains("kilo") || unit.equals("kb")) {
@@ -211,7 +211,7 @@ public class GetPerms {
         return size;
     }
 
-    public BigDecimal appSize(String application_id) {  // method to get an application's size.
+    public BigDecimal appSize (String application_id) {  // method to get an application's size.
         final PackageManager pm = context.getPackageManager();
         BigDecimal size;
         try {
@@ -233,7 +233,7 @@ public class GetPerms {
         return new JSONObject(perms);
     }
 
-    public JSONObject getRequested(String application_id) {  // method to get all requested permissions for a particular application.
+    public JSONObject getRequested (String application_id) {  // method to get all requested permissions for a particular application.
         HashMap<String, String[]> requested_perms = new HashMap<>();
         try{
             PackageInfo packageInfo = context.getPackageManager().getPackageInfo(application_id, GET_PERMISSIONS);
@@ -254,7 +254,7 @@ public class GetPerms {
         return new JSONObject(requested_perms);
     }
 
-    public JSONObject getGranted(String application_id) {  // method to get all granted permissions for a particular application.
+    public JSONObject getGranted (String application_id) {  // method to get all granted permissions for a particular application.
         final PackageManager pm = context.getPackageManager();
         HashMap<String, String[]> granted_perms = new HashMap<>();
         try{
@@ -285,7 +285,7 @@ public class GetPerms {
         return new JSONObject(granted_perms);
     }
 
-    public JSONObject getRequested() {  // method to get all requested permissions from all applications.
+    public JSONObject getRequested () {  // method to get all requested permissions from all applications.
         final PackageManager pm = context.getPackageManager();
         HashMap<String, JSONArray> perms = new HashMap<>();
         List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
@@ -299,7 +299,7 @@ public class GetPerms {
         return new JSONObject(perms);
     }
 
-    public JSONObject getGranted() {  // method to get all granted permissions from all applications.
+    public JSONObject getGranted () {  // method to get all granted permissions from all applications.
         final PackageManager pm = context.getPackageManager();
         HashMap<String, JSONArray> perms = new HashMap<>();
         List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
@@ -313,7 +313,7 @@ public class GetPerms {
         return new JSONObject(perms);
     }
 
-    public boolean isInstalled(String application_id) {  // method to check if an application is installed.
+    public boolean isInstalled (String application_id) {  // method to check if an application is installed.
         boolean flag = false;
         final PackageManager pm = context.getPackageManager();
         List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
@@ -331,7 +331,7 @@ public class GetPerms {
         return flag;
     }
 
-    public boolean isRequesting(String application_id, String permission_name) {  // method to check if an application requests a specified permission.
+    public boolean isRequesting (String application_id, String permission_name) {  // method to check if an application requests a specified permission.
         boolean flag = false;
         try{
             PackageInfo packageInfo = context.getPackageManager().getPackageInfo(application_id, GET_PERMISSIONS);
@@ -359,7 +359,7 @@ public class GetPerms {
         return flag;
     }
 
-    public boolean isGranted(String application_id, String permission_name) {  // method to check if a specified permission is granted to an application.
+    public boolean isGranted (String application_id, String permission_name) {  // method to check if a specified permission is granted to an application.
         final PackageManager pm = context.getPackageManager();
         boolean flag = false;
         try{
@@ -397,7 +397,7 @@ public class GetPerms {
         return flag;
     }
 
-    public JSONObject appsRequesting(String permission_name) {  // method to get applications requesting a specific permission type.
+    public JSONObject appsRequesting (String permission_name) {  // method to get applications requesting a specific permission type.
         final PackageManager pm = context.getPackageManager();
         HashMap<String, ArrayList<String>> apps = new HashMap<>();
         List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
@@ -416,7 +416,7 @@ public class GetPerms {
         return new JSONObject(apps);
     }
 
-    public JSONObject appsGranted(String permission_name) {  // method to get applications granted a specific permission type.
+    public JSONObject appsGranted (String permission_name) {  // method to get applications granted a specific permission type.
         final PackageManager pm = context.getPackageManager();
         HashMap<String, ArrayList<String>> apps = new HashMap<>();
         List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
