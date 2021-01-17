@@ -1,7 +1,8 @@
-[![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](LICENSE)
+[![License](https://img.shields.io/badge/License-MIT-purple)](LICENSE)
 [![JitPack](https://jitpack.io/v/com.gitlab.thomascat/GetPerms.svg)](https://jitpack.io/#com.gitlab.thomascat/GetPerms)
-[![Maintenance](https://img.shields.io/badge/Maintained%3F-Yes-green.svg)](https://GitHub.com/4f77616973/GetPerms/graphs/commit-activity)
+[![Maintenance](https://img.shields.io/badge/Maintained-Yes-green.svg)](https://github.com/4f77616973/GetPerms/graphs/commit-activity)
 [![Java](https://img.shields.io/badge/Made%20with-Java-1f425f.svg)](https://java.com)
+[![Preview](https://img.shields.io/badge/Preview-Click%20Here!-blue)](/app/build/outputs/apk/debug/app-debug.apk)
 
 # GetPerms
 
