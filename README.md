@@ -12,11 +12,11 @@ To get the latest build artifact, with the latest changes to the library, you ca
 
 ### Using the Demo App
 
-In the app, use the first box, enter an app's name on your phone to search for it. This gives you data about the app, including it's ID, name, signature's hashcode, the date it was installed on, and JSON objects of what permissions it requests and what permissions were granted to it. In the next text box, you can do a reverse lookup of all applications that request or are granted a particular permission. Clicking the 'Demo Methods Below' button shows you every single application and its requested and granted permissions on your phone. (**Note:** clicking this button may take a while to show results.)
-
 <img src="/demo.gif" alt="Demonstration video" width="240">
 
-For example, typing 'YouTube' in the first box gives you `com.google.android.youtube`. Typing `com.google.android.youtube` in the second box gives you data about the YouTube app, including JSON objects of requested and granted permissions. You can select a permission from the results, such as `android.permission.FOREGROUND_SERVICE`, by pressing and holding on it. Pasting this in the third box gives you JSON objects of other apps that request or are granted the _Foreground Service_ permission.
+In the app, use the first box, enter an app on your phone (_YouTube_, for example) to search for it. Pressing Enter gives you data about the app, including it's ID, icon, name, signature's hashcode, the date it was installed on, and JSON objects of what permissions it requests and what permissions were granted to it. You can copy a permission from the results (such as `android.permission.FOREGROUND_SERVICE`) by pressing and holding on it and paste this in the next box. This lets you do a reverse lookup of all applications that request or are granted the permission you entered.
+
+Clicking the _Demo Methods Below_ button shows you every single application and its requested and granted permissions on your phone. (**Note:** clicking this button may take a while to show results.)
 
 ## ADDING / IMPORTING TO YOUR PROJECT
 
