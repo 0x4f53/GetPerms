@@ -14,7 +14,7 @@ To get the latest build artifact, with the latest changes to the library, you ca
 
 <img src="/demo.gif" alt="Demonstration video" width="240">
 
-In the app, use the first box, enter an app on your phone (_YouTube_, for example) to search for it. Pressing Enter gives you data about the app, including it's ID, icon, name, signature's hashcode, the date it was installed on, and JSON objects of what permissions it requests and what permissions were granted to it. You can copy a permission from the results (such as `android.permission.FOREGROUND_SERVICE`) by pressing and holding on it and paste this in the next box. This lets you do a reverse lookup of all applications that request or are granted the permission you entered.
+In the app, enter an app on your phone (_YouTube_, for example) in the first box to  to search for it. Pressing Enter gives you data about the app, including it's ID, icon, name, signature's hashcode, the date it was installed on, and JSON objects of what permissions it requests and what permissions were granted to it. You can copy a permission from the results (such as `android.permission.FOREGROUND_SERVICE`) by pressing and holding on it and paste this in the next box. This lets you do a reverse lookup of all applications that request or are granted the permission you entered.
 
 Clicking the _Demo Methods Below_ button shows you every single application and its requested and granted permissions on your phone. (**Note:** clicking this button may take a while to show results.)
 
