@@ -67,11 +67,9 @@ _where `+` is the latest [release tag](https://gitlab.com/ThomasCat/getperms/-/t
 
 ## USAGE / IMPLEMENTING IN YOUR PROJECT
 
-To use this library create an object for GetPerms in your Java or Kotlin file using: `GetPerms object = new GetPerms(context);`, _where `context` is the application's context and `object` is the object name._ You can then use call methods from the library as explained further.
+To use this library create an object for GetPerms in your Java or Kotlin file using: `GetPerms object = new GetPerms(context);`, _where `context` is the application's context and `object` is the object name._ You can then call the following methods from the library
 
 ### Included Methods
-
-This library contains the following methods:
 
 - `int noOfApps()` : list the number of installed applications.
 
@@ -109,7 +107,7 @@ Create an object (here, `appScanner`) in your Java file as such
 GetPerms appScanner = new GetPerms(getApplicationContext());
 ```
 
-To get granted permissions, we need to invoke `getGranted()` from the newly created object, which is of type `JSONObject`, and supply the Google Maps app's application ID. So we first create a JSON object named `granted_permissions`, and supply the application ID as a parameter (_com.google.android.apps.maps_) to `getGranted` as shown below
+To get granted permissions, we need to invoke `getGranted()` from the newly created object, which is of type `JSONObject`, and supply Google Maps' application ID. So we first create a JSON object named `granted_permissions`, and supply the application ID as a parameter (_com.google.android.apps.maps_) to `getGranted()` as shown below
 
 ```
 JSONObject granted_permissions = appScanner.getGranted ("com.google.android.apps.maps");
