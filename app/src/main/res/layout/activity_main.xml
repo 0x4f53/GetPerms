@@ -42,15 +42,18 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/appSearchInput"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/search_app"
-                android:inputType="text"
-                android:maxLines="1"
-                android:autofillHints="@string/search_app" />
+                android:layout_height="match_parent"
+                android:layout_margin="5dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/appSearchInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Enter app name (eg: Google)"
+                    android:singleLine="true" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <View
                 android:id="@+id/divider9"
@@ -228,15 +231,18 @@
                 android:layout_height="1dp"
                 android:background="?android:attr/listDivider" />
 
-            <EditText
-                android:id="@+id/permissionNameInput"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/enter_permission_name_input"
-                android:inputType="text"
-                android:maxLines="1"
-                android:autofillHints="@+id/appIDInput" />
+                android:layout_height="match_parent"
+                android:layout_margin="5dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/permissionNameInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Enter permission (eg: READ_CONTACTS)"
+                    android:singleLine="true" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <View
                 android:id="@+id/divider13"

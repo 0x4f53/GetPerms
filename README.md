@@ -1,32 +1,16 @@
+[![Android](https://img.shields.io/badge/Made%20for-Android%20-41c27b.svg?style=flat&logo=android)](https://android.com)
+[![Java](https://img.shields.io/badge/Made%20with-Java-1f425f.svg)](https://java.com)
+[![Open Source](https://img.shields.io/badge/Open%20Source-Yes-blue)](https://opensource.org/)
 [![License](https://img.shields.io/badge/License-MIT-purple)](LICENSE)
 [![JitPack](https://jitpack.io/v/com.gitlab.thomascat/GetPerms.svg)](https://jitpack.io/#com.gitlab.thomascat/GetPerms)
 [![Maintenance](https://img.shields.io/badge/Maintained-Yes-green.svg)](https://github.com/4f77616973/GetPerms/graphs/commit-activity)
-[![Java](https://img.shields.io/badge/Made%20with-Java-1f425f.svg)](https://java.com)
-[![Preview](https://img.shields.io/badge/Preview-Click%20Here!-blue)](/app/build/outputs/apk/debug/app-debug.apk)
+[![APK](https://img.shields.io/badge/Download%20APK-Click%20Here!-blue)](/app/build/outputs/apk/debug/app-debug.apk)
 
 # GetPerms
 
-An Android library to get permissions that apps request, permissions you grant them explicitly and more. 
-
-## DEMO / PREVIEW OF THE LIBRARY
-
-### Installing the Demo App
-
-[A demo app can be found here](/app/build/outputs/apk/debug/app-debug.apk). The minimum API for the app is API28 / Android Pie. Install the APK file to your device and launch it.
-
-To get the latest build artifact, with the latest changes to the library, you can visit the [CI / CD jobs page](https://gitlab.com/ThomasCat/getperms/-/jobs) and grab the latest archive.
-
-### Using the Demo App
-
-<img src="/demo.gif" alt="Demonstration video" width="240">
-
-In the app, enter an app on your phone (_YouTube_, for example) in the first box to  to search for it. Pressing Enter gives you data about the app, including it's ID, icon, name, signature's hashcode, the date it was installed on, and JSON objects of what permissions it requests and what permissions were granted to it. You can copy a permission from the results (such as `android.permission.FOREGROUND_SERVICE`) by pressing and holding on it and paste this in the next box. This lets you do a reverse lookup of all applications that request or are granted the permission you entered.
-
-Clicking the _Demo Methods Below_ button shows you every single application and its requested and granted permissions on your phone. (**Note:** clicking this button may take a while to show results.)
+An Android library to get requested and granted app permissions, app metadata (icon, size, signature) and more!
 
 ## ADDING / IMPORTING TO YOUR PROJECT
-
-This is a library written in Java, uploaded to https://jitpack.io. To use it with your project, add it via Gradle (or download it manually if you want to).
 
 To add _GetPerms_ to your project
 
@@ -46,7 +30,7 @@ To add _GetPerms_ to your project
   ```
   dependencies {
     // add along with other dependencies
-    implementation 'com.gitlab.ThomasCat:GetPerms:+'
+    implementation 'com.github.4f77616973:GetPerms:+'
   }
   ```
 
@@ -54,11 +38,9 @@ _where `+` is the latest [release tag](https://gitlab.com/ThomasCat/getperms/-/t
 
 ### Via Direct Download
 
-1. Download library by clicking the _Download_ button at the top of this page.
-2. Extract the library.
+1. Download library by clicking the _Download_ button at the top of this page and extract the library.
 3. Open Android Studio and go to **File** → **New** → **Import Module**.
-5. Go to the extracted library's path (`/GetPerms-master/GetPerms`) and select it.
-6. Uncheck other modules and add `GetPerms`.
+5. Go to the extracted library's path (`/GetPerms-master/GetPerms`) and select it. Uncheck other modules and check `GetPerms`.
 7. Add the following Gradle dependency in your app-level `build.gradle`
   
   ```
@@ -67,50 +49,169 @@ _where `+` is the latest [release tag](https://gitlab.com/ThomasCat/getperms/-/t
 
 ## USAGE / IMPLEMENTING IN YOUR PROJECT
 
-To use this library create an object for GetPerms in your Java or Kotlin file using: `GetPerms object = new GetPerms(context);`, _where `context` is the application's context and `object` is the object name._ You can then call the following methods from the library
+To use this library, first create an object for GetPerms in your Java or Kotlin file using: 
 
-### Included Methods
+```
+GetPerms gp = new GetPerms(context);
+```
 
-- `int noOfApps()` : list the number of installed applications.
+_where `context` is the current application context and `gp` is the GetPerms object name._ You can then call the following methods from the library
 
-- `BigInteger appSize(String application_id)` : get an application's size (Bytes by default).
-- `BigDecimal appSize(String application_id, String unit)` : get an application's size in a specific unit (where `unit` can be _kB_, _MB_, _GB_, _TB_, _KiB_, _MiB_ and _TiB_).
+### Built-in Methods
 
-- `Drawable appIcon(String application_id)` : get the icon of an application.
+#### `Drawable appIcon (String packageName)`
 
-- `LocalDateTime installedOn(String application_id)` : show when an application was first installed.
-- `LocalDateTime lastUpdated(String application_id)` : show when an application was last updated.
+input: package name as string (example: `com.google.android.apps.photos`)
 
-- `boolean isInstalled(String application_id)` : check if an application is installed.
-- `boolean isRequesting(String application_id, String permission_name)` : check if an application requests specified permission (Eg: `android.permission.BLUETOOTH`).
-- `boolean isGranted(String application_id, String permission_name)` : check if a specified permission is granted to an application.
+output: returns a drawable of a package's app icon.
 
-- `String appID(String application_name)` : get an application's ID based on its name (Eg: _Gmail_).
-- `String appName(String application_id)` : get an application's name based on its ID (Eg: `com.google.android.gm`).
-- `String getCertHashCode(String application_id)` : get an application's signing certificate's hash code (SHA hash code, looks like gibberish to humans).
+#### `String getVersionName (String packageName)`
 
-- `JSONObject appID()` : list all applications by their ID.
-- `JSONObject appsRequesting(String permission_name)` : get all applications requesting a specified permission.
-- `JSONObject appsGranted(String permission_name)` : get applications granted a specified permission.
-- `JSONObject getRequested(String application_id)` : get all requested permissions for a particular application.
-- `JSONObject getRequested()` : get all requested permissions from all applications.
-- `JSONObject getGranted(String application_id)` : get all granted permissions for a particular application.
-- `JSONObject getGranted()` : get all granted permissions from all applications.
+* input: package name as string (example: `com.google.android.apps.photos`)
+
+* output: returns the package version name (example: `v1.12.234-alpha`) as string.
+
+#### `String getVersionCode (String packageName)`
+
+* input: package name as string (example: `com.google.android.apps.photos`)
+
+* output: returns the package version code (example: `20200821`) as long.
+
+#### `int noOfApps ()`
+
+* output: returns the number of installed apps as integer.
+
+#### `LocalDateTime installedOn (String packageName)`
+
+* input: package name as string (example: `com.google.android.apps.photos`)
+
+* output: returns the package installation date as LocalDateTime.
+
+#### `LocalDateTime lastModified (String packageName)`
+
+* input: package name as string (example: `com.google.android.apps.photos`)
+
+* output: returns the package modification (like an app update) date as LocalDateTime.
+
+#### `String packageName (String appName)`
+
+* input: app name as string (example: `YouTube`)
+
+* output: returns the package name as string (example: `com.google.android.youtube`).
+
+#### `String appName (String packageName)`
+
+* input: package name as string (example: `com.google.android.youtube`)
+
+* output: returns the package name as string (example: `YouTube`).
+
+#### `String getCertHashCode (String packageName)`
+
+* input: package name as string (example: `com.google.android.apps.photos`)
+
+* output: returns a SHA-1 hash code of the signing certificate used to sign the package as String. Can be used for tamper detection.
+
+#### `BigDecimal appSize (String packageName, String unit)`
+
+* inputs: package name as string (example: `com.google.android.apps.photos`), unit as string (example: `kb`).
+
+* output: returns package size as BigDecimal (example: `19343`).
+
+#### `Map <String, String> getRequested (String packageName)`
+
+* input: package name as string (example: `com.google.android.apps.photos`).
+
+* output: returns a list of all permissions a package needs as a map of strings.
+
+#### `Map <String, String> getGranted (String packageName)`
+
+* input: package name as string (example: `com.google.android.apps.photos`)
+
+* output: returns a list of all permissions a package is granted by the user as a map of strings.
+
+#### `Map <String, ArrayList<String>> appsRequesting (String permission_name)`
+
+* input: permission name as string (example: `android.permission.INTERNET`)
+
+* output: returns a list of all packages requesting a specific permission as a map of strings.
+
+#### `Map <String, ArrayList<String>> appsGranted (String permission_name)`
+
+* input: permission name as string (example: `android.permission.INTERNET`)
+
+* output: returns a list of all packages granted a specific permission as a map of strings.
+
+#### `boolean isRequesting (String packageName, String permission_name)`
+
+* input: permission name as string (example: `android.permission.INTERNET`)
+
+* output: returns true if a package requests the specified permission or false if it doesn't.
+
+#### `boolean isGranted (String packageName, String permission_name)`
+
+* input: permission name as string (example: `android.permission.INTERNET`)
+
+* output: returns true if the user grants a package the specified permission or false if the user didn't.
+
+#### `String getPermissionFullName (String permission_name)`
+
+* input: incomplete permission name (example: `camera`)
+
+* output: complete permission name as string (example: `android.permission.CAMERA`).
+
+#### `String getPermissionLabel (String permission_name)`
+
+* input: permission name as string (example: `android.permission.PHONE`)
+
+* output: permission label as string (example: `directly call phone numbers`).
+
+### Overriding functions (use with threads to prevent lag)
+
+`Map <String, String> packageName ()`: lists all applications with their ID
+
+`Map <String, BigDecimal> appSize ()`: gets all application sizes.
+
+`Map <String, String[]> getRequested ()`: gets all requested permissions from all applications.
+
+`Map <String, String[]> getGranted ()`: gets all granted permissions from all applications.
+
+
+## DEMO / PREVIEW OF THE LIBRARY
+
+### Installing the Demo App
+
+[A demo app can be found here](/app/build/outputs/apk/debug/app-debug.apk). The minimum API for the app is API28 / Android Pie. Install the APK file to your device and launch it.
+
+To get the latest build artifact, with the latest changes to the library, you can visit the [CI / CD jobs page](https://gitlab.com/ThomasCat/getperms/-/jobs) and grab the latest archive.
+
+### Using the Demo App
+
+<img src="/demo.gif" alt="Demonstration GIF" width="240">
+
+In the app, enter an app on your phone (_YouTube_, for example) in the first box to  to search for it. Pressing Enter gives you data about the app, including it's ID, icon, name, signature's hashcode, the date it was installed on, and JSON objects of what permissions it requests and what permissions were granted to it. You can copy a permission from the results (such as `android.permission.FOREGROUND_SERVICE`) by pressing and holding on it and paste this in the next box. This lets you do a reverse lookup of all applications that request or are granted the permission you entered.
+
+Clicking the _Demo Methods Below_ button shows you every single application and its requested and granted permissions on your phone. (**Note:** clicking this button may take a while to show results.)
 
 ### A Simple Example
 
 Let's try this with an in-built app on most phones, [Google Maps](https://play.google.com/store/apps/details?id=com.google.android.apps.maps). Of course, this can be used with third-party apps too.
 
-Create an object (here, `appScanner`) in your Java file as such
+Create an object (here, `gp`) in your Java file as such
 
 ```
-GetPerms appScanner = new GetPerms(getApplicationContext());
+GetPerms gp = new GetPerms(getApplicationContext());
 ```
 
-To get granted permissions, we need to invoke `getGranted()` from the newly created object, which is of type `JSONObject`, and supply Google Maps' application ID. So we first create a JSON object named `granted_permissions`, and supply the application ID as a parameter (_com.google.android.apps.maps_) to `getGranted()` as shown below
+To get granted permissions, we invoke `getGranted()` from the newly created object, which is of type `Map`.  We then supply Google Maps' package name as shown below. 
 
 ```
-JSONObject granted_permissions = appScanner.getGranted ("com.google.android.apps.maps");
+Map <*,*> granted_permissions = gp.getGranted ("com.google.android.apps.maps");
+```
+
+To get granted permissions as a JSONObject, we invoke `getGranted()` as before, but cast it as a JSONObject.
+
+```
+JSONObject granted_permissions = JSONObject(gp.getGranted ("com.google.android.apps.maps"));
 ```
 
 The object `granted_permissions` now returns a JSON object with whatever permissions the user granted to the Google Maps app. On a test emulator device running stock Android 11 (API 30), this returned
@@ -148,7 +249,7 @@ The object `granted_permissions` now returns a JSON object with whatever permiss
 }
 ```
 
-Use this data as you wish. You can store it in a database if you'd like, using something like [Google's JSON.simple](https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple).
+You can store it in a database if you'd like, using something like [Google's JSON.simple](https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple), or even convert it to a CSV instead of JSON using [SuperCSV](https://super-csv.github.io/super-csv/examples_writing.html).
 
 One interesting use case of this could be in a [Security Information and Event Management (SIEM)](https://en.wikipedia.org/wiki/Security_information_and_event_management) application, where an employee's work phone can be monitored for malicious apps that may compromise security and incur loss to an organization.
 
@@ -166,15 +267,8 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on the code of conduc
 
 This project uses [Semantic Versioning](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://gitlab.com/ThomasCat/GetPerms/tags).
 
-## AUTHORS
-
-* **Owais Shaikh** - *Developer* - GitLab: [ThomasCat](https://gitlab.com/ThomasCat), GitHub: [4f77616973](https://github.com/4f77616973).
-
 ## LICENSE
 
-This project is licensed under the MIT License - see [LICENSE](LICENSE) for details.
+[Copyright © 2021 Owais Shaikh](LICENSE)
 
-## ACKNOWLEDGEMENT
-
-* [Xerfia](https://www.xerfia.com/), for the motivation.
-* [Google](https://android.google.com), for Android.
+GitLab: [ThomasCat](https://gitlab.com/ThomasCat) | GitHub: [4f77616973](https://github.com/4f77616973) | Contact: [Email](mailto://0x4f@tuta.io)

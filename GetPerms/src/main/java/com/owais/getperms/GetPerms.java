@@ -29,14 +29,12 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.PermissionGroupInfo;
+import android.content.pm.PermissionInfo;
 import android.content.pm.Signature;
 import android.graphics.drawable.Drawable;
 import android.util.Base64;
 import android.util.Log;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.File;
 import java.math.BigDecimal;
@@ -49,123 +47,134 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 import static android.content.pm.PackageManager.GET_PERMISSIONS;
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 
 public class GetPerms {
-    Context context;
+    Context context_argument;
+    final PackageManager packageManager;
 
-    public GetPerms (Context context_argument){
-        context = context_argument;
+    public GetPerms (Context context){
+        context_argument = context;
+        packageManager = context.getPackageManager();
     }
 
-    public Drawable appIcon (String application_id) {  // method to get the icon of an application
+    public Drawable appIcon (String packageName) {  // method to get the icon of an application
         Drawable icon = null;
         try {
-            icon = context.getPackageManager().getApplicationIcon(application_id);
+            icon = packageManager.getApplicationIcon(packageName);
         } catch (PackageManager.NameNotFoundException noPackage) {
-            Log.e ("GetPerms > appIcon()", "Could not find package(s)!");
+            Log.e ("GetPerms > appIcon ()", "Could not find package(s)!");
         }
         return icon;
     }
 
-    public int noOfApps() {  // method to list the number of installed applications
-        int no_of_apps = 0;
-        final PackageManager pm = context.getPackageManager();
-        List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
-        for (ApplicationInfo ignored : packages) {
-            no_of_apps++;
+    public String getVersionName(String packageName) {  // method to list the number of installed applications
+        String versionName = null;
+        try {
+            versionName = packageManager.getPackageInfo(packageName, 0).versionName;
+        } catch (PackageManager.NameNotFoundException e) {
+            Log.e ("GetPerms > getPackageVersionName ()", "Could not find package(s)!");
         }
-        return no_of_apps;
+        return versionName;
     }
 
-    public LocalDateTime installedOn (String application_id) {  // method which shows when an application was first installed
+    public long getVersionCode(String packageName) {  // method to list the number of installed applications
+        long version = 0;
+        try {
+            version = packageManager.getPackageInfo(packageName, 0).getLongVersionCode();
+        } catch (PackageManager.NameNotFoundException e) {
+            Log.e ("GetPerms > getPackageVersionCode ()", "Could not find package(s)!");
+        }
+        return version;
+    }
+
+    public int noOfApps() {  // method to list the number of installed applications
+        List<ApplicationInfo> packages = packageManager.getInstalledApplications(PackageManager.GET_META_DATA);
+        return packages.size();
+    }
+
+    public LocalDateTime installedOn (String packageName) {  // method which shows when an application was first installed
         long installDate;
         try {
-            installDate = context.getPackageManager().getPackageInfo(application_id, 0).firstInstallTime;
-            Log.e("GetPerms > installedOn()", String.valueOf(installDate));
+            installDate = packageManager.getPackageInfo(packageName, 0).firstInstallTime;
         } catch (PackageManager.NameNotFoundException noPackage) {
-            Log.e("GetPerms > installedOn()", "Could not find package(s)!");
+            Log.e("GetPerms > installedOn ()", "Could not find package(s)!");
             return null;
         }
         return Instant.ofEpochMilli(installDate).atZone(ZoneId.systemDefault()).toLocalDateTime();
     }
 
-    public LocalDateTime lastUpdated (String application_id) {  // method which shows when an application was last updated
+    public LocalDateTime lastModified (String packageName) {  // method which shows when an application was last updated
         long lastUpdated;
         try {
-            PackageManager pm = context.getPackageManager();
-            ApplicationInfo appInfo = pm.getApplicationInfo(application_id, 0);
-            String appFile = appInfo.sourceDir;
-            lastUpdated = new File(appFile).lastModified();
+            ApplicationInfo appInfo = packageManager.getApplicationInfo(packageName, 0);
+            lastUpdated = new File(appInfo.sourceDir).lastModified();
         } catch (PackageManager.NameNotFoundException noPackage) {
-            Log.e("GetPerms > lastUpdated()", "Could not find package(s)!");
+            Log.e("GetPerms > lastUpdated ()", "Could not find package(s)!");
             return null;
         }
         return Instant.ofEpochMilli(lastUpdated).atZone(ZoneId.systemDefault()).toLocalDateTime();
     }
 
-    public JSONObject appID() {  // method to list all applications with their ID
-        final PackageManager pm = context.getPackageManager();
-        HashMap<String, String> perms = new HashMap<>();
+    public Map<String, String> packageName() {  // method to list all applications with their ID
+        final PackageManager pm = context_argument.getPackageManager();
+        Map<String, String> perms = new HashMap<>();
         try {
             List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
             for (ApplicationInfo packageInfo : packages) {
-                perms.put((String) pm.getApplicationLabel(pm.getApplicationInfo(packageInfo.packageName, PackageManager.GET_META_DATA)),packageInfo.packageName);
+                String appName = (String) pm.getApplicationLabel(pm.getApplicationInfo(packageInfo.packageName, PackageManager.GET_META_DATA));
+                perms.put(appName, packageInfo.packageName);
             }
         } catch (PackageManager.NameNotFoundException noPackage){
-            Log.e("GetPerms > appID()", "Could not find package(s)!");
+            Log.e("GetPerms > packageName ()", "Could not find package(s)!");
             return null;
         }
-        return new JSONObject(perms);
+        return perms;
     }
 
-    public String appID (String application_name) {  // method to get an application's ID based on its name
-        JSONObject all_packages = appID();
+    public String packageName (String appName) {  // method to get an application's ID based on its name
+        Map<String, String> all_packages = packageName();
         String package_name = "";
-        for ( int i = 0; i < Objects.requireNonNull(all_packages.names()).length(); i++ ) {
-            try {
-                String key = Objects.requireNonNull(all_packages.names()).getString(i);
-                if (key.toLowerCase().equals(application_name.toLowerCase())) {
-                    package_name = (String) all_packages.get(Objects.requireNonNull(all_packages.names()).getString(i));
+        try {
+            for (String key: all_packages.keySet()) {
+                if (key.toLowerCase().contains(appName.toLowerCase())) {
+                    package_name = all_packages.get(key);
                     break;
                 }
-            } catch (JSONException | NullPointerException e) {
-                Log.e("GetPerms > appID()", "Couldn't find " + application_name + " on device!");
-                package_name = null;
             }
+        } catch (NullPointerException e) {
+            Log.e("GetPerms > packageName ()", "Couldn't find " + appName + " on device!");
+            package_name = null;
         }
         return package_name;
     }
 
-    public String appName (String application_id) {  // method to get application name based on application ID
-        JSONObject all_packages = appID();
+    public String appName (String packageName) {  // method to get application name based on package name
+        Map<String, String> all_packages = packageName();
         String app_name = "";
-        Iterator<?> keys = all_packages.keys();
-        try{
-            while (keys.hasNext()) {
-                String key = (String) keys.next();
+        for (String key: all_packages.keySet()) {
+            try {
                 Object value = all_packages.get(key);
-                if (value.equals(application_id)){
+                if (value.equals(packageName)){
                     app_name = key;
                 }
+            } catch (NullPointerException e) {
+                Log.e("GetPerms > appName ()", "Couldn't find " + packageName + " on device!");
+                app_name = null;
             }
-        } catch (JSONException | NullPointerException e) {
-            Log.e("GetPerms > appName()", "Couldn't find " + application_id + " on device!");
-            app_name = null;
         }
         return app_name;
     }
 
-    public String getCertHashCode (String application_id) {  // method to get an application's signing certificate's hash code.
-        final PackageManager pm = context.getPackageManager();
+    public String getCertHashCode (String packageName) {  // method to get an application's signing certificate's hash code.
         String signatureBase64 = "";
         try {
-            final PackageInfo packageInfo = pm.getPackageInfo(application_id, PackageManager.GET_SIGNING_CERTIFICATES);
+            final PackageInfo packageInfo = packageManager.getPackageInfo(packageName, PackageManager.GET_SIGNING_CERTIFICATES);
             final Signature[] signatures = packageInfo.signingInfo.getApkContentsSigners();
             final MessageDigest md = MessageDigest.getInstance("SHA");
             for (Signature signature : signatures) {
@@ -176,14 +185,14 @@ public class GetPerms {
             Log.e("GetPerms", "Package not found on device!");
             signatureBase64 = null;
         } catch (NoSuchAlgorithmException noAlgo){
-            Log.e("GetPerms > getCertHashCode()", "Cannot find SHA algorithm on device!");
+            Log.e("GetPerms > getCertHashCode ()", "Cannot find SHA algorithm on device!");
             signatureBase64 = null;
         }
         return signatureBase64;
     }
 
-    public BigDecimal appSize (String application_id, String unit) {  // method to get an application's size.
-        BigDecimal size = appSize(application_id);
+    public BigDecimal appSize (String packageName, String unit) {  // method to get an application's size.
+        BigDecimal size = appSize(packageName);
         try {
             if (unit.toLowerCase().contains("kilo") || unit.equals("kb")) {
                 size=size.divide(BigDecimal.valueOf((long) Math.pow(1000,1)), 2, RoundingMode.CEILING);
@@ -205,38 +214,36 @@ public class GetPerms {
                 throw new IllegalArgumentException();
             }
         } catch (IllegalArgumentException | NullPointerException illegalSize) {
-            Log.e("GetPerms > appSize()", "Illegal size specified! Use only kB, GB, TB, kiB, MiB, GiB or TiB");
+            Log.e("GetPerms > appSize ()", "Illegal size specified! Use only kB, GB, TB, kiB, MiB, GiB or TiB");
             return null;
         }
         return size;
     }
 
-    public BigDecimal appSize (String application_id) {  // method to get an application's size.
-        final PackageManager pm = context.getPackageManager();
+    public BigDecimal appSize (String packageName) {  // method to get an application's size.
         BigDecimal size;
         try {
-            size = BigDecimal.valueOf(new File(pm.getApplicationInfo(application_id, 0).publicSourceDir).length());
+            size = BigDecimal.valueOf(new File(packageManager.getApplicationInfo(packageName, 0).publicSourceDir).length());
         } catch (PackageManager.NameNotFoundException noPackage){
-            Log.e("GetPerms > appSize()", "Package not found on device!");
+            Log.e("GetPerms > appSize ()", "Package not found on device!");
             return null;
         }
         return size;
     }
 
-    public JSONObject appSize() {  // method to get all application sizes.
-        final PackageManager pm = context.getPackageManager();
-        HashMap<String, BigDecimal> perms = new HashMap<>();
-        List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
+    public Map<String, BigDecimal> appSize() {  // method to get all application sizes.
+        Map<String, BigDecimal> perms = new HashMap<>();
+        List<ApplicationInfo> packages = packageManager.getInstalledApplications(PackageManager.GET_META_DATA);
         for (ApplicationInfo packageInfo : packages) {
             perms.put(packageInfo.packageName, appSize(packageInfo.packageName));
         }
-        return new JSONObject(perms);
+        return perms;
     }
 
-    public JSONObject getRequested (String application_id) {  // method to get all requested permissions for a particular application.
-        HashMap<String, String[]> requested_perms = new HashMap<>();
-        try{
-            PackageInfo packageInfo = context.getPackageManager().getPackageInfo(application_id, GET_PERMISSIONS);
+    public Map<String, String[]> getRequested (String packageName) {  // method to get all requested permissions for a particular application.
+        Map<String, String[]> requested_perms = new HashMap<>();
+        try {
+            PackageInfo packageInfo = packageManager.getPackageInfo(packageName, GET_PERMISSIONS);
             int permissions_length = packageInfo.requestedPermissions.length;
             String[] permissions_array = new String[permissions_length];
             for (int i = 0; i < permissions_length; i++) {
@@ -245,20 +252,21 @@ public class GetPerms {
                     permissions_array[i]=requested_permissions;
                 }
             }
-            requested_perms.put(application_id, permissions_array);
+
+            requested_perms.put(packageName, permissions_array);
+
         } catch (PackageManager.NameNotFoundException noPackage){
-            Log.e("GetPerms > getRequested()", "Package not found on device!");
+            Log.e("GetPerms > getRequested ()", "Package not found on device!");
         } catch (NullPointerException noPermissions){
-            Log.e("GetPerms > getRequested()", "Package requests no permissions!");
+            Log.e("GetPerms > getRequested ()", "Package requests no permissions!");
         }
-        return new JSONObject(requested_perms);
+        return requested_perms;
     }
 
-    public JSONObject getGranted (String application_id) {  // method to get all granted permissions for a particular application.
-        final PackageManager pm = context.getPackageManager();
-        HashMap<String, String[]> granted_perms = new HashMap<>();
-        try{
-            PackageInfo packageInfo = context.getPackageManager().getPackageInfo(application_id, GET_PERMISSIONS);
+    public Map<String, String[]> getGranted (String packageName) {  // method to get all granted permissions for a particular application.
+        Map<String, String[]> granted_perms = new HashMap<>();
+        try {
+            PackageInfo packageInfo = packageManager.getPackageInfo(packageName, GET_PERMISSIONS);
             int permissions_length = packageInfo.requestedPermissions.length;
             String[] permissions_array = new String[permissions_length];
             String[] granted_array = new String[permissions_length];
@@ -269,72 +277,76 @@ public class GetPerms {
                     permissions_array[i]=requested_permissions;
                 }
             }
+
             // then put in a new string list of granted permissions
             for (int i = 0; i < permissions_length; i++) {
-                if (pm.checkPermission (permissions_array[i], application_id) == PERMISSION_GRANTED) {
+                if (packageManager.checkPermission (permissions_array[i], packageName) == PERMISSION_GRANTED) {
                     granted_array[i]=permissions_array[i];
                 }
             }
+
             String[] cleanedArray = Arrays.stream(granted_array).filter(Objects::nonNull).toArray(String[]::new);   // remove null values
-            granted_perms.put(application_id, cleanedArray);
+            granted_perms.put(packageName, cleanedArray);
+
         } catch (PackageManager.NameNotFoundException noPackage){
-            Log.e("GetPerms > getGranted()", "Package not found on device!");
+            Log.e("GetPerms > getGranted ()", "Package not found on device!");
         } catch (NullPointerException noPermissions){
-            Log.e("GetPerms > getGranted()", "Package requests no permissions!");
+            Log.e("GetPerms > getGranted ()", "Package requests no permissions!");
         }
-        return new JSONObject(granted_perms);
+        return granted_perms;
     }
 
-    public JSONObject getRequested () {  // method to get all requested permissions from all applications.
-        final PackageManager pm = context.getPackageManager();
-        HashMap<String, JSONArray> perms = new HashMap<>();
-        List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
+    public Map<String, String[]> getRequested () {  // method to get all requested permissions from all applications.
+        Map<String, String[]> perms = new HashMap<>();
+        List<ApplicationInfo> packages = packageManager.getInstalledApplications(PackageManager.GET_META_DATA);
         for (ApplicationInfo packageInfo : packages) {
             try {
-                perms.put(packageInfo.packageName, getRequested(packageInfo.packageName).getJSONArray(packageInfo.packageName));
-            } catch (NullPointerException | JSONException noPermissions){
-                Log.e("GetPerms > getRequested()", "Package "+packageInfo.packageName+"requests no permissions!");
+                perms.put(packageInfo.packageName, getRequested(packageInfo.packageName).get(packageInfo.packageName));
+            } catch (NullPointerException noPermissions){
+                Log.e("GetPerms > getRequested ()", "Package "+packageInfo.packageName+"requests no permissions!");
             }
         }
-        return new JSONObject(perms);
+        return perms;
     }
 
-    public JSONObject getGranted () {  // method to get all granted permissions from all applications.
-        final PackageManager pm = context.getPackageManager();
-        HashMap<String, JSONArray> perms = new HashMap<>();
-        List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
+    public Map<String, String[]> getGranted () {  // method to get all granted permissions from all applications.
+        Map<String, String[]> perms = new HashMap<>();
+        List<ApplicationInfo> packages = packageManager.getInstalledApplications(PackageManager.GET_META_DATA);
         for (ApplicationInfo packageInfo : packages) {
             try {
-                perms.put(packageInfo.packageName, getGranted(packageInfo.packageName).getJSONArray(packageInfo.packageName));
-            } catch (NullPointerException | JSONException noPermissions){
-                Log.e("GetPerms > getGranted()", "Package "+packageInfo.packageName+"requests no permissions!");
+                perms.put(packageInfo.packageName, getGranted(packageInfo.packageName).get(packageInfo.packageName));
+            } catch (NullPointerException noPermissions){
+                Log.e("GetPerms > getGranted ()", "Package "+packageInfo.packageName+"requests no permissions!");
             }
         }
-        return new JSONObject(perms);
+        return perms;
     }
 
-    public boolean isInstalled (String application_id) {  // method to check if an application is installed.
+    public boolean isInstalled (String packageName) {  // method to check if an application is installed.
         boolean flag = false;
-        final PackageManager pm = context.getPackageManager();
-        List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
+        List<ApplicationInfo> packages = packageManager.getInstalledApplications(PackageManager.GET_META_DATA);
         for (ApplicationInfo packageInfo : packages) {
             try {
-                if (packageInfo.packageName.equals(application_id)) {
+                if (packageInfo.packageName.equals(packageName)) {
                     flag = true;
                     break;
                 }
             } catch (NullPointerException noPermissions){
-                Log.e("GetPerms > appsRequesting()", "Package "+packageInfo.packageName+" requests no permissions!");
+                Log.e("GetPerms > isInstalled ()", "Package "+packageInfo.packageName+" requests no permissions!");
                 return false;
             }
         }
+
         return flag;
     }
 
-    public boolean isRequesting (String application_id, String permission_name) {  // method to check if an application requests a specified permission.
+    String fullRequestedPermissionName = null;
+    String fullGrantedPermissionName = null;
+
+    public boolean isRequesting (String packageName, String permission_name) {  // method to check if an application requests a specified permission.
         boolean flag = false;
         try{
-            PackageInfo packageInfo = context.getPackageManager().getPackageInfo(application_id, GET_PERMISSIONS);
+            PackageInfo packageInfo = packageManager.getPackageInfo(packageName, GET_PERMISSIONS);
             int permissions_length = packageInfo.requestedPermissions.length;
             String[] permissions_array = new String[permissions_length];
             for (int i = 0; i < permissions_length; i++) {
@@ -343,30 +355,33 @@ public class GetPerms {
                     permissions_array[i]=requested_permissions;
                 }
             }
+
             for (int i = 0; i < permissions_length; i++) {
                 if (permissions_array[i].toLowerCase().contains(permission_name.toLowerCase())) {
+                    fullRequestedPermissionName = permissions_array[i];
                     flag = true;
                     break;
                 }
             }
+
         } catch (PackageManager.NameNotFoundException noPackage){
-            Log.e("GetPerms > isRequesting()", "Package not found on device!");
+            Log.e("GetPerms > isRequesting ()", "Package not found on device!");
             return false;
         } catch (NullPointerException noPermissions){
-            Log.e("GetPerms > isRequesting()", "Package requests no permissions!");
+            Log.e("GetPerms > isRequesting ()", "Package requests no permissions!");
             return false;
         }
         return flag;
     }
 
-    public boolean isGranted (String application_id, String permission_name) {  // method to check if a specified permission is granted to an application.
-        final PackageManager pm = context.getPackageManager();
+    public boolean isGranted (String packageName, String permission_name) {  // method to check if a specified permission is granted to an application.
         boolean flag = false;
-        try{
-            PackageInfo packageInfo = context.getPackageManager().getPackageInfo(application_id, GET_PERMISSIONS);
+        try {
+            PackageInfo packageInfo = packageManager.getPackageInfo(packageName, GET_PERMISSIONS);
             int permissions_length = packageInfo.requestedPermissions.length;
             String[] permissions_array = new String[permissions_length];
             String[] granted_array = new String[permissions_length];
+
             // first create list of all requested permissions
             for (int i = 0; i < permissions_length; i++) {
                 if (packageInfo.requestedPermissionsFlags[i] != 0) {
@@ -374,33 +389,36 @@ public class GetPerms {
                     permissions_array[i]=requested_permissions;
                 }
             }
+
             // then put in a new string list of granted permissions
             for (int i = 0; i < permissions_length; i++) {
-                if (pm.checkPermission (permissions_array[i], application_id) == PERMISSION_GRANTED) {
+                if (packageManager.checkPermission (permissions_array[i], packageName) == PERMISSION_GRANTED) {
                     granted_array[i]=permissions_array[i];
                 }
             }
-            String[] cleanedArray = Arrays.stream(granted_array).filter(Objects::nonNull).toArray(String[]::new);   // remove null values.
+
+            String[] cleanedArray = Arrays.stream(granted_array).filter(Objects::nonNull).toArray(String[]::new);
             for (String s : cleanedArray) {
-                if (s.toLowerCase().contains(permission_name.toLowerCase())) {
+                if (s.toLowerCase().contains(permission_name)) {
+                    fullGrantedPermissionName = s;
                     flag = true;
                     break;
                 }
             }
+
         } catch (PackageManager.NameNotFoundException noPackage){
-            Log.e("GetPerms > isGranted()", "Package not found on device!");
+            Log.e("GetPerms > isGranted ()", "Package not found on device!");
             return false;
         } catch (NullPointerException noPermissions){
-            Log.e("GetPerms > isGranted()", "Package requests no permissions!");
+            Log.e("GetPerms > isGranted ()", "Package requests no permissions!");
             return false;
         }
         return flag;
     }
 
-    public JSONObject appsRequesting (String permission_name) {  // method to get applications requesting a specific permission type.
-        final PackageManager pm = context.getPackageManager();
-        HashMap<String, ArrayList<String>> apps = new HashMap<>();
-        List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
+    public Map<String, ArrayList<String>> appsRequesting (String permission_name) {  // method to get applications requesting a specific permission type.
+        Map<String, ArrayList<String>> apps = new HashMap<>();
+        List<ApplicationInfo> packages = packageManager.getInstalledApplications(PackageManager.GET_META_DATA);
         ArrayList<String> apps_list = new ArrayList<>();
         for (ApplicationInfo packageInfo : packages) {
             try {
@@ -408,30 +426,66 @@ public class GetPerms {
                     apps_list.add(packageInfo.packageName);
                 }
             } catch (NullPointerException noPermissions){
-                Log.e("GetPerms > appsRequesting()", "Package "+packageInfo.packageName+" requests no permissions!");
+                Log.e("GetPerms > appsRequesting ()", "Package "+packageInfo.packageName+" requests no permissions!");
                 return null;
             }
         }
-        apps.put(permission_name, apps_list);
-        return new JSONObject(apps);
+        apps.put(fullRequestedPermissionName, apps_list);
+        return apps;
     }
 
-    public JSONObject appsGranted (String permission_name) {  // method to get applications granted a specific permission type.
-        final PackageManager pm = context.getPackageManager();
-        HashMap<String, ArrayList<String>> apps = new HashMap<>();
-        List<ApplicationInfo> packages = pm.getInstalledApplications(PackageManager.GET_META_DATA);
+    public String getPermissionFullName (String permission_name) { // get permission full name
+        String permissionFullName = null;
+        List<PermissionGroupInfo> lstGroups = packageManager.getAllPermissionGroups(0);
+        for (PermissionGroupInfo pgi : lstGroups) {
+            try {
+                List<PermissionInfo> lstPermissions = packageManager.queryPermissionsByGroup(pgi.name, 0);
+                for (PermissionInfo pi : lstPermissions) {
+                    if (pi.name.contains(permission_name)) permissionFullName = pi.name;
+
+                }
+            } catch (Exception ex) {
+                Log.e("GetPerms > getPermissionFullName ()", "Couldn't find any permissions matching '" + permission_name + "'!");
+                return null;
+            }
+        }
+        return permissionFullName;
+    }
+
+    public String getPermissionLabel (String permission_name) { // get permission label
+        CharSequence csPermissionLabel;
+        String permissionLabel = null;
+        List<PermissionGroupInfo> lstGroups = packageManager.getAllPermissionGroups(0);
+        for (PermissionGroupInfo pgi : lstGroups) {
+            try {
+                List<PermissionInfo> lstPermissions = packageManager.queryPermissionsByGroup(pgi.name, 0);
+                for (PermissionInfo pi : lstPermissions) {
+                    csPermissionLabel = pi.loadLabel(packageManager);
+                    permissionLabel = csPermissionLabel.toString();
+                }
+            } catch (Exception ex) {
+                Log.e("GetPerms > getPermissionLabel ()", "Couldn't find any permissions matching '" + permission_name + "'!");
+                return null;
+            }
+        }
+        return permissionLabel;
+    }
+
+    public Map<String, ArrayList<String>> appsGranted (String permission_name) {  // method to get applications granted a specific permission type.
+        Map<String, ArrayList<String>> apps = new HashMap<>();
+        List<ApplicationInfo> packages = packageManager.getInstalledApplications(PackageManager.GET_META_DATA);
         ArrayList<String> apps_list = new ArrayList<>();
         for (ApplicationInfo packageInfo : packages) {
             try {
-                if (isGranted(packageInfo.packageName, permission_name)) {
+                if (isGranted(packageInfo.packageName, permission_name.toUpperCase())) {
                     apps_list.add(packageInfo.packageName);
                 }
-            } catch (NullPointerException noPermissions){
-                Log.e("GetPerms > appsGranted()", "Package "+packageInfo.packageName+" requests no permissions!");
+            } catch (NullPointerException noPermissions) {
+                Log.e("GetPerms > appsGranted ()", "Package " + packageInfo.packageName + " requests no permissions!");
                 return null;
             }
         }
-        apps.put(permission_name, apps_list);
-        return new JSONObject(apps);
+        apps.put(fullGrantedPermissionName, apps_list);
+        return apps;
     }
 }

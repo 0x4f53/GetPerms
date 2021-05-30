@@ -25,4 +25,7 @@
     <string name="get_requested"> ▸ getRequested() - requested permissions for all apps</string>
     <string name="app_size_all"> ▸ appSize() - get app size for all apps</string>
     <string name="get_granted"> ▸ getGranted() - granted permissions for all apps</string>
+    <string name="title_activity_main2">MainActivity2</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
 </resources>
