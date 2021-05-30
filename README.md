@@ -179,23 +179,6 @@ output: returns a drawable of a package's app icon.
 
 `Map <String, String[]> getGranted ()`: gets all granted permissions from all applications.
 
-
-## DEMO / PREVIEW OF THE LIBRARY
-
-### Installing the Demo App
-
-[A demo app can be found here](/app/build/outputs/apk/debug/app-debug.apk). The minimum API for the app is API28 / Android Pie. Install the APK file to your device and launch it.
-
-To get the latest build artifact, with the latest changes to the library, you can visit the [CI / CD jobs page](https://gitlab.com/ThomasCat/getperms/-/jobs) and grab the latest archive.
-
-### Using the Demo App
-
-<img src="/demo.gif" alt="Demonstration GIF" width="240">
-
-In the app, enter an app on your phone (_YouTube_, for example) in the first box to  to search for it. Pressing Enter gives you data about the app, including it's ID, icon, name, signature's hashcode, the date it was installed on, and JSON objects of what permissions it requests and what permissions were granted to it. You can copy a permission from the results (such as `android.permission.FOREGROUND_SERVICE`) by pressing and holding on it and paste this in the next box. This lets you do a reverse lookup of all applications that request or are granted the permission you entered.
-
-Clicking the _Demo Methods Below_ button shows you every single application and its requested and granted permissions on your phone. (**Note:** clicking this button may take a while to show results.)
-
 ### A Simple Example
 
 Let's try this with an in-built app on most phones, [Google Maps](https://play.google.com/store/apps/details?id=com.google.android.apps.maps). Of course, this can be used with third-party apps too.
@@ -256,6 +239,22 @@ The object `granted_permissions` now returns a JSON object with whatever permiss
 You can store it in a database if you'd like, using something like [Google's JSON.simple](https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple), or even convert it to a CSV instead of JSON using [SuperCSV](https://super-csv.github.io/super-csv/examples_writing.html).
 
 One interesting use case of this could be in a [Security Information and Event Management (SIEM)](https://en.wikipedia.org/wiki/Security_information_and_event_management) application, where an employee's work phone can be monitored for malicious apps that may compromise security and incur loss to an organization.
+
+## DEMO APP
+
+### Installing the Demo App
+
+[A demo app can be found here](/app/build/outputs/apk/debug/app-debug.apk). The minimum API for the app is API28 / Android Pie. Install the APK file to your device and launch it.
+
+To get the latest build artifact, with the latest changes to the library, you can visit the [CI / CD jobs page](https://gitlab.com/ThomasCat/getperms/-/jobs) and grab the latest archive.
+
+### Using the Demo App
+
+<img src="/demo.gif" alt="Demonstration GIF" width="240">
+
+In the app, enter an app on your phone (_YouTube_, for example) in the first box to  to search for it. Pressing Enter gives you data about the app, including it's ID, icon, name, signature's hashcode, the date it was installed on, and JSON objects of what permissions it requests and what permissions were granted to it. You can copy a permission from the results (such as `android.permission.FOREGROUND_SERVICE`) by pressing and holding on it and paste this in the next box. This lets you do a reverse lookup of all applications that request or are granted the permission you entered.
+
+Clicking the _Demo Methods Below_ button shows you every single application and its requested and granted permissions on your phone. (**Note:** clicking this button may take a while to show results.)
 
 ## CREDITS
 
