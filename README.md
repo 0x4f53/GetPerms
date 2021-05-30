@@ -8,7 +8,7 @@
 
 # GetPerms
 
-<img src="getperms-logo.png" alt="GetPerms logo" width="10%">
+<img src="getperms-logo.png" alt="GetPerms logo" width="30%">
 
 An Android library to get requested and granted app permissions, app metadata (icon, size, signature) and more!
 
