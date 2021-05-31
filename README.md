@@ -2,13 +2,22 @@
 [![Java](https://img.shields.io/badge/Made%20with-Java-1f425f.svg)](https://java.com)
 [![Open Source](https://img.shields.io/badge/Open%20Source-Yes-blue)](https://opensource.org/)
 [![License](https://img.shields.io/badge/License-MIT-purple)](LICENSE)
-[![JitPack](https://jitpack.io/v/com.gitlab.thomascat/GetPerms.svg)](https://jitpack.io/#com.gitlab.thomascat/GetPerms)
+[![JitPack](https://jitpack.io/v/com.github.4f77616973/GetPerms.svg)](https://jitpack.io/#com.github.4f77616973/GetPerms)
 [![Maintenance](https://img.shields.io/badge/Maintained-Yes-green.svg)](https://github.com/4f77616973/GetPerms/graphs/commit-activity)
 [![APK](https://img.shields.io/badge/Download%20APK-Click%20Here!-blue)](/app/build/outputs/apk/debug/app-debug.apk)
 
 # GetPerms
 
-<img src="getperms-logo.png" alt="GetPerms logo" width="30%">
+<table align = "center">
+  <tr>
+    <td>
+      <img src="getperms-logo.png" alt="GetPerms logo" width = "75dp">
+    </td>
+    <td>
+      <p style = "font-size: 30px; weight: bold;">GetPerms</p>
+    </td>
+  </tr>
+</table>
 
 An Android library to get requested and granted app permissions, app metadata (icon, size, signature) and more!
 
@@ -38,7 +47,7 @@ To add _GetPerms_ to your project
   }
   ```
 
-_where `+` is the latest [release tag](https://gitlab.com/ThomasCat/getperms/-/tags) available._ The latest version on JitPack as of now is: [![](https://jitpack.io/v/com.gitlab.thomascat/GetPerms.svg)](https://jitpack.io/#com.gitlab.thomascat/GetPerms)
+_where `+` is the latest [release tag](https://github.com/4f77616973/getperms/-/tags) available._ The latest version on JitPack as of now is: [![Tag](https://img.shields.io/github/v/tag/4f77616973/GetPerms?label="")](https://jitpack.io/#com.github.4f77616973/GetPerms)
 
 ### Via Direct Download
 
@@ -259,8 +268,12 @@ Clicking the _Demo Methods Below_ button shows you every single application and 
 ## CREDITS
 
 * [JitPack](https://jitpack.io) - Hosting
-* [Android Studio](https://developer.android.com/studio/) - Development
+
 * [GitLab CI/CD](https://docs.gitlab.com/ee/ci/) - Demo builds
+
+* [Coffee Icon Pack - Samy](https://dribbble.com/shots/2606705-Dropbox-Redesign-Material-Design-Icon) - Icon inspiration
+
+* [PackageManager.java](https://android.googlesource.com/platform/frameworks/base/+/master/core/java/android/content/pm/PackageManager.java) - PackageManager source code to retrieve data.
 
 ## CONTRIBUTING
 
