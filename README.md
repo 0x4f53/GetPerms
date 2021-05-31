@@ -8,16 +8,7 @@
 
 # GetPerms
 
-<table align = "center">
-  <tr>
-    <td>
-      <img src="getperms-logo.png" alt="GetPerms logo" width = "75dp">
-    </td>
-    <td>
-      <p style = "font-size: 30px; weight: bold;">GetPerms</p>
-    </td>
-  </tr>
-</table>
+<img src = "getperms-logo.png" alt = "GetPerms logo" width = "75dp">
 
 An Android library to get requested and granted app permissions, app metadata (icon, size, signature) and more!
 
