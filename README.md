@@ -238,7 +238,7 @@ The object `granted_permissions` now returns a JSON object with whatever permiss
 
 You can store it in a database if you'd like, using something like [Google's JSON.simple](https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple), or even convert it to a CSV instead of JSON using [SuperCSV](https://super-csv.github.io/super-csv/examples_writing.html).
 
-One interesting use case of this could be in a [Security Information and Event Management (SIEM)](https://en.wikipedia.org/wiki/Security_information_and_event_management) application, where an employee's work phone can be monitored for malicious apps that may compromise security and incur loss to an organization.
+One interesting use case of this could be in a [Security Information and Event Management (SIEM)](https://en.wikipedia.org/wiki/Security_information_and_event_management) or MSOC application, where an employee's work phone can be monitored for malicious apps that may compromise security and incur loss to an organization.
 
 ## DEMO APP
 
@@ -258,13 +258,15 @@ Clicking the _Demo Methods Below_ button shows you every single application and 
 
 ## CREDITS
 
-* [JitPack](https://jitpack.io) - Hosting
+* [JitPack](https://jitpack.io) - Hosting.
 
-* [GitLab CI/CD](https://docs.gitlab.com/ee/ci/) - Demo builds
+* [GitLab CI/CD](https://docs.gitlab.com/ee/ci/) - Demo builds.
 
-* [Coffee Icon Pack - Samy](https://dribbble.com/shots/2606705-Dropbox-Redesign-Material-Design-Icon) - Icon inspiration
+* [Coffee Icon Pack - Samy](https://dribbble.com/shots/2606705-Dropbox-Redesign-Material-Design-Icon) - Icon.
 
 * [PackageManager.java](https://android.googlesource.com/platform/frameworks/base/+/master/core/java/android/content/pm/PackageManager.java) - PackageManager source code to retrieve data.
+
+* [Xerfia](https://xerfia.com) - security analysis and requirements specification.
 
 ## CONTRIBUTING
 
