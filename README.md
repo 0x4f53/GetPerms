@@ -1,10 +1,10 @@
 [![Android](https://img.shields.io/badge/Made%20for-Android%20-41c27b.svg?style=flat&logo=android)](https://android.com)
-[![Java](https://img.shields.io/badge/Made%20with-Java-1f425f.svg)](https://java.com)
-[![Open Source](https://img.shields.io/badge/Open%20Source-Yes-blue)](https://opensource.org/)
-[![License](https://img.shields.io/badge/License-MIT-purple)](LICENSE)
+[![Java](https://img.shields.io/badge/Made%20with-Java-1f425f.svg?style=flat&logo=java)](https://java.com)
+[![Open Source](https://img.shields.io/badge/Open%20Source-Yes-blue?style=flat&logo=github)](https://opensource.org/)
+[![License](https://img.shields.io/badge/License-MIT-purple?style=flat&logo=libreoffice)](LICENSE)
+[![Maintenance](https://img.shields.io/badge/Maintained-Yes-green.svg?style=flat&logo=symantec)](https://github.com/4f77616973/GetPerms/graphs/commit-activity)
 [![JitPack](https://jitpack.io/v/com.github.4f77616973/GetPerms.svg)](https://jitpack.io/#com.github.4f77616973/GetPerms)
-[![Maintenance](https://img.shields.io/badge/Maintained-Yes-green.svg)](https://github.com/4f77616973/GetPerms/graphs/commit-activity)
-[![APK](https://img.shields.io/badge/Download%20APK-Click%20Here!-blue)](/app/build/outputs/apk/debug/app-debug.apk)
+[![APK](https://img.shields.io/badge/Download%20APK-Click%20Here!-blue?style=flat&logo=dropbox)](/app/build/outputs/apk/debug/app-debug.apk)
 
 # GetPerms
 
