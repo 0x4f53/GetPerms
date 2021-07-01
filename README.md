@@ -12,7 +12,7 @@
 
 An Android wrapper library to get requested and granted app permissions, app metadata (icon, size, signature) and more!
 
-Want to quickly get an application's icon in just one line of code? Making a banking app and need to check the see if your app has been illegaly modified? Or maybe you just want to know a hidden app's package name to remove it from your phone. GetPerms does it all! [Try a demo app of the library here](/app/build/outputs/apk/debug/app-debug.apk).
+Want to quickly get an application's icon in just one line of code? Making a banking app and need to check the see if your app has been illegally modified? Or maybe you just want to know a hidden app's package name to remove it from your phone. GetPerms does it all! [Try a demo app of the library here](/app/build/outputs/apk/debug/app-debug.apk).
 
 ## ADDING / IMPORTING TO YOUR PROJECT
 
