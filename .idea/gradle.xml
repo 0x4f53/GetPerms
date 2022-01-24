@@ -4,14 +4,14 @@
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
-        <option name="testRunner" value="PLATFORM" />
+        <option name="testRunner" value="GRADLE" />
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="modules">
           <set>
-            <option value="$USER_HOME$/AndroidStudioProjects/GetPerms" />
-            <option value="$USER_HOME$/AndroidStudioProjects/GetPerms/GetPerms" />
-            <option value="$USER_HOME$/AndroidStudioProjects/GetPerms/app" />
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/GetPerms" />
+            <option value="$PROJECT_DIR$/app" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

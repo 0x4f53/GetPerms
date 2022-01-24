@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 31
     defaultConfig {
         applicationId "com.owais.getperms_demo"
-        minSdkVersion 28
-        targetSdkVersion 30
+        minSdkVersion 29
+        targetSdkVersion 31
         versionCode 4
         versionName "4.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -31,10 +31,11 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.material:material:1.2.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
-    implementation project(path: ':GetPerms')
+    implementation 'com.google.guava:guava:30.1-android'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.1'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
-    // implementation 'com.gitlab.ThomasCat:GetPerms:+'
+    implementation project(path:':GetPerms')
+    //implementation 'com.gitlab.ThomasCat:GetPerms:+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 }

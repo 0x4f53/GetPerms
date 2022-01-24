@@ -12,8 +12,9 @@
         <activity
             android:name=".MainActivity2"
             android:label="@string/title_activity_main2"
-            android:theme="@style/Theme.GetPermsDemo.NoActionBar"></activity>
-        <activity android:name=".MainActivity">
+            android:theme="@style/Theme.GetPermsDemo.NoActionBar" />
+        <activity android:name=".MainActivity"
+            android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
